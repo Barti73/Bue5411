@@ -1,0 +1,55 @@
+<div style="width: 90%;">
+<table id="tblFixed" cellpadding="0" cellspacing="0" class="tblFixed">
+<thead>
+<tr>
+    <th align="left" style="">Nombre</th>
+    <th align="left" style="">Código</th>
+    <th align="left" style="">Disciplina</th>
+    <th align="left" style="">Instructor</th>
+    <th align="center" style="">Periodicidad</th>
+    <th align="center" style="">Duración</th>
+    <th align="center" style="">Sesiones</th>
+    <th align="center" style="">Valor</th>
+    <th align="center" style="">Activo</th>
+    <th align="center" style="">Editar</th>
+</tr>
+</thead>
+
+<tbody>
+{% for programa in programas %}
+<tr>
+    <td align="left">{{ programa.nombre }}</td>
+    <td align="left">{{ programa.codigo }}</td>
+    <td align="left">{{ programa.disciplina }}</td>
+    <td align="left">{{ programa.instructor }}</td>
+    <td align="center">{{ programa.periodicidad }}</td>
+    <td align="center">{{ programa.duracion }}</td>
+    <td align="center">{{ programa.sesiones }}</td>
+    <td align="center">{{ programa.valor }}</td>
+    <td align="center"><img src="{{ asset('bundles/public/images/ok.png') }}" style="visibility: {{ programa.activo }}; display: {{ programa.extra }}" alt="" ></td>
+    <td align="center">
+        <a href="javascript:void(0)" onClick="Popup('Edit/{{ programa.hashedId }}', '700', '400');" style="display: {{ programa.extra }}" >
+			<img src="{{ asset('bundles/public/images/edit_blue.png') }}" border='0' alt="">
+        </a>
+    </td>
+</tr>
+{% endfor %}
+<!-- Relleno Grilla -->
+{% for i in 0..12 %}
+<tr>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+</div>

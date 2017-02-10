@@ -1,0 +1,108 @@
+{% extends 'base_popup.html.twig' %}
+
+{% block body %}
+
+<script src="{{ asset('bundles/public/js/abm.js') }}" type="text/javascript"></script>
+
+<div id="content" class="body_abm">
+
+<center>
+<form id="frmAlumnoAddEdit" method="post" action="{{urlAlumnoSave}}" enctype="multipart/form-data" />
+
+<br/><br/>
+
+{% if alumnoId %}
+	<div>
+		<img src="{{ asset('bundles/public/images/foto_alumno/') }}{{ strFotoAlumno }}" class="imageAlumno" />
+	</div>
+{% endif %}
+
+<table width="80%" cellpadding="1" cellspacing="1" border="0">
+    <tr>
+        <td align="center"><span class="titleAddEdit">{{titulo}} Alumno</span></td>
+    </tr>
+</table>
+<br/>
+
+<table width="80%" cellpadding="1" cellspacing="1" border="0">
+    <tr class="CeldaTxtBuscar">
+        <td>Nombre (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="50" id="txtNombre" name="txtNombre" value="{{strNombre}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>RUT (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="50" id="txtRut" name="txtRut" value="{{strRut}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Edad (*):</td>
+        <td><input type="text" class="inputTextShort" maxlength="2" id="txtEdad" name="txtEdad" value="{{strEdad}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Teléfono (*):</td>
+        <td><input type="text" class="inputTextShort" maxlength="20" id="txtTelefono" name="txtTelefono" value="{{strTelefono}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Email (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="100" id="txtEmail" name="txtEmail" value="{{strEmail}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Objetivo (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="255" id="txtObjetivo" name="txtObjetivo" value="{{strObjetivo}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Contacto Emergencia (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="100" id="txtContactoEmergencia" name="txtContactoEmergencia" value="{{strContactoEmergencia}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Condiciones Médicas (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="100" id="txtCondicionesMedicas" name="txtCondicionesMedicas" value="{{strCondicionesMedicas}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Centro Médico Preferencia (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="100" id="txtCentroMedicoPreferencia" name="txtCentroMedicoPreferencia" value="{{strCentroMedicoPreferencia}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Fecha Ingreso (*):</td>
+        <td><input type="date" class="inputTextShort" maxlength="" id="txtFechaIngreso" name="txtFechaIngreso" value="{{strFechaIngreso}}" /></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Registro Huella (*):</td>
+        <td><input type="text" class="inputTextCommon" maxlength="100" id="txtRegistroHuella" name="txtRegistroHuella" value="{{strRegistroHuella}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Foto (*):</td>
+        <td><input type="file" class="pointerOnHover" id="txtFoto" name="txtFoto"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Firma Doc.:</td>
+        <td><input type="checkbox" class="classCheckbox" id="chkFirma" name="chkFirma" {{chkFirma}} value="" onclick="FxSetCheckBox('chkFirma');"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Activo:</td>
+        <td><input type="checkbox" class="classCheckbox" id="chkActivo" name="chkActivo" {{chkActivo}} value="" onclick="FxSetCheckBox();"/></td>
+    </tr>
+</table>
+<br/><br/>
+<table width="80%" cellpadding="1" cellspacing="1" border="0">
+    <tr>
+        <td align="center">
+            <input class="css_btn_class_dark" type="button" value="Grabar" name="btnSave" id="btnSave" onclick="FxSaveAlumnoJS();"/>
+            <input class="css_btn_class_dark" type="button" value="Cerrar" name="btnClose" id="btnClose" onclick="javascript: window.close();"/>
+        </td>
+    </tr>
+</table>
+
+<input type="hidden" id="txtAlumnoId" name="txtAlumnoId" value="{{alumnoId}}"/>
+<div id="div_null"></div>
+
+<script type="text/javascript">
+FxSetCheckBox();
+{{FxCallback|raw}}
+</script>
+
+</form>
+</center>
+
+</div>
+
+{% endblock %}

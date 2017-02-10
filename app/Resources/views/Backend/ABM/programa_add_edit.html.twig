@@ -1,0 +1,91 @@
+{% extends 'base_popup.html.twig' %}
+
+{% block body %}
+
+<script src="{{ asset('bundles/public/js/abm.js') }}" type="text/javascript"></script>
+
+<div id="content" class="body_abm">
+
+<center>
+<form id="frmProgramaAddEdit" method="post" action="{{urlProgramaSave}}">
+
+<br/><br/>
+<table width="80%" cellpadding="1" cellspacing="1" border="0">
+    <tr>
+        <td align="center"><span class="titleAddEdit">{{titulo}} Programa</span></td>
+    </tr>
+</table>
+<br/>
+
+<table width="80%" cellpadding="1" cellspacing="1" border="0">
+    <tr class="CeldaTxtBuscar">
+        <td>Nombre (*):</td>
+        <td><input type="text"  maxlength="50" id="txtNombre" name="txtNombre" class="inputTextCommon" value="{{strNombre}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Código (*):</td>
+        <td><input type="text" maxlength="10" id="txtCodigo" name="txtCodigo" class="inputTextCommon" value="{{strCodigo}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Disciplina/Instructor (*):</td>
+        <td>
+			<select id="cmbDisciplinaInstructor" name="cmbDisciplinaInstructor" class="selectCommon">
+				<option value="">(Seleccione)</option>
+				{% for disciplinaInstructor in disciplinasInstructores %}
+					<option value="{{ disciplinaInstructor.id }}" {{ disciplinaInstructor.selected }}>{{ disciplinaInstructor.nombre }}</option>
+				{% endfor %}
+			</select>
+		</td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Periodicidad (*):</td>
+        <td>
+			<select id="cmbPeriodicidad" name="cmbPeriodicidad" class="selectCommon">
+				<option value="">(Seleccione)</option>
+				{% for periodicidad in periodicidades %}
+					<option value="{{ periodicidad.id }}" {{ periodicidad.selected }}>{{ periodicidad.nombre }}</option>
+				{% endfor %}
+			</select>
+		</td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Duración Meses (*):</td>
+        <td><input type="text" maxlength="5" id="txtDuracion" name="txtDuracion" class="inputTextCommon" value="{{strDuracion}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Cantidad Sesiones (*):</td>
+        <td><input type="text" maxlength="5" id="txtSesiones" name="txtSesiones" class="inputTextCommon" value="{{strSesiones}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Valor (*):</td>
+        <td><input type="text" maxlength="10" id="txtValor" name="txtValor" class="inputTextCommon" value="{{strValor}}"/></td>
+    </tr>
+    <tr class="CeldaTxtBuscar">
+        <td>Activo:</td>
+        <td><input type="checkbox" class="classCheckbox" id="chkActivo" name="chkActivo" {{chkActivo}} value="" onclick="FxSetCheckBox();"/></td>
+    </tr>
+</table>
+<br/><br/>
+<table width="80%" cellpadding="1" cellspacing="1" border="0">
+    <tr>
+        <td align="center">
+            <input class="css_btn_class_dark" type="button" value="Grabar" name="btnSave" id="btnSave" onclick="FxSaveProgramaJS();"/>
+            <input class="css_btn_class_dark" type="button" value="Cerrar" name="btnClose" id="btnClose" onclick="javascript: window.close();"/>
+        </td>
+    </tr>
+</table>
+
+<input type="hidden" id="txtProgramaId" name="txtProgramaId" value="{{programaId}}"/>
+<div id="div_null"></div>
+
+<script type="text/javascript">
+FxSetCheckBox();
+{{FxCallback|raw}}
+</script>
+
+</form>
+</center>
+
+</div>
+
+{% endblock %}

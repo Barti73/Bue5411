@@ -1,0 +1,40 @@
+<div style="width: 90%;">
+<table id="tblFixed" cellpadding="0" cellspacing="0" class="tblFixed">
+<thead>
+<tr>
+    <th align="left" style="">Nombre</th>
+    <th align="left" style="">Username</th>
+    <th align="left" style="">Perfil</th>
+    <th align="center" style="">Activo</th>
+    <th align="center" style="">Editar</th>
+</tr>
+</thead>
+
+<tbody>
+{% for usuario in usuarios %}
+<tr>
+    <td align="left">{{ usuario.nombre }}</td>
+    <td align="left">{{ usuario.username }}</td>
+    <td align="left">{{ usuario.perfilNombre }}</td>
+    <td align="center"><img src="{{ asset('bundles/public/images/ok.png') }}" style="visibility: {{ usuario.visibleGrid }}; display: {{ usuario.extra }}" alt="" ></td>
+    <td align="center">
+        <a href="javascript:void(0)" onClick="Popup('Edit/{{ usuario.hashedId }}', '600', '400');" style="display: {{ usuario.extra }}" >
+			<img src="{{ asset('bundles/public/images/edit_blue.png') }}" border='0' alt="">
+        </a>
+    </td>
+</tr>
+{% endfor %}
+<!-- Relleno Grilla -->
+{% for i in 0..12 %}
+<tr>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="left"></td>
+    <td align="center"></td>
+    <td align="center"></td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+</div>

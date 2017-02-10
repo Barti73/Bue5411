@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}HeroGym{% endblock %}</title>
+        
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		<script src="{{ asset('bundles/public/js/jquery-1.11.3.min.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('bundles/public/js/common_functions.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('bundles/public/custom_alert/jquery.alerts.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('bundles/public/js/main.js') }}" type="text/javascript"></script>
+		<link rel="stylesheet" href="{{ asset('bundles/public/css/style.css') }}" type="text/css" >
+		<link rel="stylesheet" href="{{ asset('bundles/public/custom_alert/jquery.alerts.css') }}" type="text/css" >
+		
+		<link rel="stylesheet" href="{{ asset('bundles/public/cssmenu/menu_styles.css') }}" type="text/css" >
+    </head>
+    <body class="normal">
+        <div id="taskbar">
+            {% block title2 %}{% endblock %}
+        </div>
+
+		{% block menu %}{% endblock %}
+		<div id="appLogoHome"></div>
+
+		<div id='cssmenu'>
+			<ul>
+				<li class=''><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::URL_LOGIN')}}"><span>Salir</span></a></li>
+				<li class='has-sub'><a href="javascript:void(0);"><span>Reportes</span></a>
+					<ul>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_REPORT_VIGENTES')}}"><span>Alumnos Vigentes</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_REPORT_NO_VIGENTES')}}"><span>Alumnos No Vigentes</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_REPORT_ASISTENCIA')}}"><span>Asistencias</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_REPORT_PAGOS')}}"><span>Pagos</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_REPORT_ACCESOS')}}"><span>Accesos</span></a></li>
+					</ul>
+				</li>
+				<li class='has-sub'><a href="javascript:void(0);"><span>Mantenedores</span></a>
+					<ul>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_ALUMNO')}}"><span>Alumno</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_DISCIPLINA')}}"><span>Disciplinas</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_INSTRUCTOR')}}"><span>Instructores</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_PROGRAMA')}}"><span>Programas</span></a></li>
+						<li><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_USUARIO')}}"><span>Usuario</span></a></li>
+					</ul>
+				</li>
+				<li class=''><a id="menuInscripcion" href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_INSCRIPCION')}}"><span>Inscripción / Renovación</span></a></li>
+				<li class=''><a href="{{constant('AppBundle\\Constants\\HeroGymConstants::URL_SITE')}}{{constant('AppBundle\\Constants\\HeroGymConstants::MENU_ACCESO')}}"><span>Control Acceso</span></a></li>
+			</ul>
+		</div>
+		<div id="divLoading"></div>
+		
+        {% block body %}{% endblock %}
+        <script type="text/javascript">
+        {% block javascripts %}
+
+        {% endblock %}
+        </script>
+    </body>
+
+</html>
