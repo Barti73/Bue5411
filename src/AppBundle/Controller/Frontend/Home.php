@@ -1,49 +1,52 @@
 <?php
 
-namespace AppBundle\Controller\Backend\Login;
+namespace AppBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use AppBundle\Controller\BL\Main\LoginBL;
+use AppBundle\Controller\BL\Backend\LoginBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Constants\Bue54Constants;
+use AppBundle\Constants\Bue5411Constants;
 
-class LoginRender extends Controller
+class News extends Controller
 {
     var $bl;
     
     public function __construct()
     {
-
     }
 
     /**
-     * @Route("/Main/{method}/{notExists}")
+     * @Route("/Backend/Login/{notExists}")
      */
-    public function mainConstructor(Request $request, $method, $notExists = null)
+    public function Login(Request $request, $notExists = null)
     {
-        $this->bl = new LoginBL($this->container);
+        //return new response(var_dump($this->container));
         
-        return $this->$method($request, $notExists);
-    }
-    
-    public function testMethod()
-    {
-        return new Response(var_dump("TEST LoginRender"));
-    }
-    
-    public function Login($request, $notExists)
-    {
         $this->get('session')->remove('userId');
         $this->get('session')->remove('userNombre');
         $this->get('session')->remove('userName');
         $this->get('session')->remove('userPerfil');
         
-        $formAction = Bue54Constants::URL_SITE.Bue54Constants::REDIRECT_LOGIN_CHECK;
-        return $this->render('Backend/Login/login.html.twig', array('formAction' => $formAction,
-                                                                    'notExists' => $notExists));
+        $formAction = Bue5411Constants::URL_SITE.Bue5411Constants::REDIRECT_LOGIN_CHECK;
+        return $this->render('Backend/login.html.twig', array('formAction' => $formAction,
+                                                              'notExists' => $notExists));
     }
+    
+//    public function mainConstructor(Request $request, $method = null, $notExists = null)
+//    {
+//        
+//        
+//        if (!$method) { $method = 'Login'; }
+//        return $this->$method($request, $notExists);
+//    }
+    
+//    public function testMethod()
+//    {
+//        return new Response(var_dump("TEST LoginRender"));
+//    }
+    
 //    
 //    public function LoginCheck($request, $notExists = null)
 //    {

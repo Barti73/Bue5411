@@ -2,7 +2,7 @@
 
 namespace AppBundle\Constants;
 
-class Bue54Constants 
+class Bue5411Constants 
 {
     const DEFAULT_TEST = "Constante de test";
     const TOTAL_ROWS = 12;
@@ -12,11 +12,11 @@ class Bue54Constants
     const CANTIDAD_TURNOS = '5';
     
     //URLs
-    const URL_SITE = "http://localhost:8080/Bue54/web/app_dev.php";
-    const URL_LOGIN = "/Main/Access/Login";
-    const REDIRECT_LOGIN_CHECK = "/Main/Access/LoginCheck";
-    const REDIRECT_NOT_FOUND = "/Main/Access/Login/NotFound";
-    const REDIRECT_CONTROL_ACCESO = "/Main/Home/Init";
+    const URL_SITE = "http://localhost:8080/Bue5411/web/app_dev.php";
+    const URL_LOGIN = "/Backend/Login";
+    const REDIRECT_LOGIN_CHECK = "/Backend/LoginCheck";
+    const REDIRECT_NOT_FOUND = "/Backend/Login/NotFound";
+    const REDIRECT_CONTROL_ACCESO = "/Backend/Home/Init";
     
     //Save
     const URL_SAVE_USUARIO = "/ABM/Usuario/Save";

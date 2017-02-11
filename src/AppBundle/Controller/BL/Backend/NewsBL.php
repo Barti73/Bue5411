@@ -1,13 +1,12 @@
 <?php
 
-namespace AppBundle\Controller\BL\Main;
+namespace AppBundle\Controller\BL\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Functions\PHPFunctions;
-use AppBundle\Controller\BL\Inscripcion\InscripcionBL;
 
-class HomeBL extends Controller
+class NewsBL extends Controller
 {
     /**
      *
@@ -16,11 +15,11 @@ class HomeBL extends Controller
     protected $em;
     protected $fx;
     
-    public function __construct($entityManager)
+    public function __construct($container)
     {
-        $this->em = $entityManager;
+        $this->em = $container->get('doctrine.orm.entity_manager');
+        $this->container = $container;
         $this->fx = new PHPFunctions();
-        
     }
     
     
