@@ -1,8 +1,7 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     06/02/2017 22:16:39                          */
+/* Created on:     11/02/2017 22:32:44                          */
 /*==============================================================*/
-
 
 drop table if exists noticia;
 
@@ -20,9 +19,10 @@ create table noticia
    id                   int not null auto_increment,
    id_usuario           int not null,
    titulo               varchar(100) not null,
-   texto                varchar(3000) not null,
+   texto                text not null,
    posicion             int not null,
    fecha                datetime not null,
+   imagen               varchar(100),
    estado               int not null,
    primary key (id)
 )
@@ -37,9 +37,10 @@ create table noticia_log
    id_noticia           int not null,
    id_usuario           int not null,
    titulo               varchar(100) not null,
-   texto                varchar(600) not null,
+   texto                text not null,
    posicion             int not null,
    fecha                datetime not null,
+   imagen               varchar(100),
    estado               int not null,
    operacion            varchar(30) not null,
    primary key (id)

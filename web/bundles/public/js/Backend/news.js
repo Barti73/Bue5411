@@ -1,5 +1,35 @@
 /* Javascript Functions */
 
+function FxOpenModalPopupNewsJS(newsId)
+{
+	var jsonArray = { "newsId": newsId };
+	var URL = $('#UrlAjaxPopup').val();
+	var strData = { value: jsonArray };
+	var strDivResponse = 'divResponseAjaxPopupModal';
+	
+	exeAjaxCallBackLoadingSetResult(URL, strData, strDivResponse, FxSetPopupJS);
+}
+
+function FxOpenModalPopupNewsJS(newsId)
+{
+	var jsonArray = { "newsId": newsId };
+	var URL = $('#UrlAjaxPopup').val();
+	var strData = { value: jsonArray };
+	var strDivResponse = 'divResponseAjaxPopupModal';
+	
+	exeAjaxCallBackLoadingSetResult(URL, strData, strDivResponse, FxSetPopupJS);
+}
+
+function FxGetGridPage(pageNumber)
+{
+	var jsonArray = { "pageNumber": pageNumber };
+	var URL = $('#UrlAjaxGetGridPage').val();
+	var strData = { value: jsonArray };
+	var strDivResponse = 'divAjaxGridNews';
+	
+	exeAjaxLoading(URL, strData, strDivResponse);
+}
+
 function FxSaveCourierJS()
 {
 	if ($('#txtNombreCourier').val() == '')

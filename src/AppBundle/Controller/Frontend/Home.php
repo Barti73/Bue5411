@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Constants\Bue5411Constants;
+use AppBundle\Constants\Codigo5411Constants;
 
 class Home extends Controller
 {
@@ -21,7 +21,7 @@ class Home extends Controller
      */
     public function Home(Request $request)
     {
-        $linkHome = Bue5411Constants::URL_SITE;
+        $linkHome = Codigo5411Constants::URL_SITE;
         return $this->render('Frontend/portal.html.twig', array('linkHome' => $linkHome));
     }
 }

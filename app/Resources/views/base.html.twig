@@ -9,7 +9,7 @@
         <link type="text/css" rel="stylesheet" href="{{ asset('bundles/public/css/materialize.css') }}"  media="screen,projection"/>
         <link type="text/css" rel="stylesheet" href="{{ asset('bundles/public/css/custom.css') }}"  media="screen,projection"/>
         <!-- Sweet Alert CSS -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/public/lib/sweetalert-master/dist/sweetalert.css') }}" />        
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/public/lib/sweetalert/dist/sweetalert.css') }}" />        
         {% block stylesheets %}
 		
         {% endblock %}
@@ -17,17 +17,21 @@
         
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
+        <!-- Jquery -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <!-- Materialize -->
         <script src="{{ asset('bundles/public/js/Materialize/materialize.js') }}" type="text/javascript"></script>
-		<!-- Common -->
+		<!-- Common Functions -->
         <script src="{{ asset('bundles/public/js/Common/common_functions.js') }}" type="text/javascript"></script>
-		<!-- Login -->
-        <script src="{{ asset('bundles/public/js/Login/login.js') }}" type="text/javascript"></script>
+		<!-- AJAX Functions -->
+        <script src="{{ asset('bundles/public/js/Common/ajax_functions.js') }}" type="text/javascript"></script>
+		<!-- Jquery Functions -->
+        <script src="{{ asset('bundles/public/js/Common/common_jquery_functions.js') }}" type="text/javascript"></script>
         <!-- Sweet Alert -->
-        <script src="{{ asset('bundles/public/lib/sweetalert-master/dist/sweetalert.min.js') }}" type="text/javascript"></script>
-		
+        <script src="{{ asset('bundles/public/lib/sweetalert/dist/sweetalert.min.js') }}" type="text/javascript"></script>
+        <!-- Paginator -->
+        <script src="{{ asset('bundles/public/lib/materializePagination/materialize-pagination.min.js') }}" type="text/javascript"></script>
+
     </head>
 
     <body>

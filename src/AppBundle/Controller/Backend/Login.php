@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BL\Backend\LoginBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Constants\Bue5411Constants;
+use AppBundle\Constants\Codigo5411Constants;
 
 class Login extends Controller
 {
@@ -38,7 +38,7 @@ class Login extends Controller
         $this->get('session')->remove('userName');
         $this->get('session')->remove('userPerfil');
         
-        $formAction = Bue5411Constants::URL_SITE.Bue5411Constants::REDIRECT_LOGIN_CHECK;
+        $formAction = Codigo5411Constants::URL_SITE.Codigo5411Constants::REDIRECT_LOGIN_CHECK;
         return $this->render('Backend/login.html.twig', array('formAction' => $formAction,
                                                               'notExists' => $notExists));
     }

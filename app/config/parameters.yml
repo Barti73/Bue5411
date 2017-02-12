@@ -2,7 +2,7 @@
 parameters:
     database_host: localhost
     database_port: 3306
-    database_name: bue54
+    database_name: codigo5411
     database_user: root
     database_password: 
     mailer_transport: smtp  

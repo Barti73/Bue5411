@@ -2,240 +2,90 @@
 
 {% block body %}
 
+<!-- JS -->
+<script src="{{ asset('bundles/public/js/Backend/news.js') }}" type="text/javascript"></script>
+
 <body>
 
 	<main>
 		<!-- Dropdown Structure -->
-		<ul id='dropdown1' class='dropdown-content'>
+		<ul id='dropdownUser' class='dropdown-content'>
 			<li><a href="#!">Editar</a></li>
 			<li class="divider"></li>
 			<li><a href="#!">Salir</a></li>
 		</ul>
 		  
 		<!-- Dropdown Structure -->
-		<ul id='dropdown2' class='dropdown-content'>
-			<li><a href="#!">Editar</a></li>
+		<ul id='dropdownMobile' class='dropdown-content'>
+			<li><a href="#!">Edit</a></li>
 			<li class="divider"></li>
-			<li><a href="#!">Salir</a></li>
+			<li><a href="#!">out</a></li>
 		</ul>			  
   
 		<nav class="nav-extended blue darken-3">
 			<div class="nav-wrapper headerMarginCustom">
-				<a href="#" class="brand-logo"><b>Noticias</b> Online</a>
+				<a href="{{ linkHome }}" class="brand-logo"><b>Noticias</b> Online</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="#">Noticias</a></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdown1">User_Name<i class="material-icons right">person_pin</i></a></li>
+					<li><a href="{{ linkHome }}">Noticias</a></li>
+					<li><a class="dropdown-button" href="#!" data-activates="dropdownUser">UserName<i class="material-icons right">person_pin</i></a></li>
 				</ul>
-				<ul class="side-nav" id="mobile-demo">
-					<li><a href="#">Noticias</a></li>
-					<li><a class="dropdown-button" href="#" data-activates="dropdown2">User_Name<i class="material-icons right">person_pin</i></a></li>
+				<ul id="mobile-demo" class="side-nav">
+					<li><a href="{{ linkHome }}">Noticias</a></li>
+					<li><a class="dropdown-button" href="#" data-activates="dropdownMobile">Usuario<i class="material-icons right">person_pin</i></a></li>
 				</ul>
 			</div>
 		</nav>
 		  
-		<div id="modal1" class="modal">
-			<div class="modal-content">
-				<h5><b>Cargar una Noticia</b></h5>
-				<div class="divider"></div>
-				<div class="section">
-				
-					<div class="row">
-						<form class="col s12">
-							<div class="row">
-								<div class="input-field col s12">
-									<input id="input_text" type="text" data-length="100">
-									<label for="input_text">Título</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-field col s12">
-									<textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
-									<label for="textarea1">Texto</label>
-								</div>
-							</div>
-						</form>
-					</div>
-				
-					<div class="row">
-						<div class="col s12">	
-							<h5>Elegir módulo de publicación</h5>
-							<div class="divider"></div>
-							<div class="section">
-								<br>
-								<div class="row">
-									<div class="col s12">
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule1">M1</a>
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule2 right">M2</a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s12">
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule3">M3</a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s12">
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule4">M4</a>
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule5 right">M5</a>
-									</div>	
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col s12">	
-							<h5>Subir Fotografía</h5>						
-							<div class="divider"></div>	
-							<p class="grey-text lighten-2">*Sólo válidos para M1 y M2</p>									
-							<div class="section"></div>
-							<form action="#">
-								<div class="file-field input-field">
-									<div class="btn blue darken-3">
-										<span>Subir</span>
-										<input type="file" multiple>
-									</div>
-									<div class="file-path-wrapper">
-										<input class="file-path validate" type="text" placeholder="Subir Fotografìa">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="modal-footer">
-					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
-					  <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ble">Cancelar</a>
-				</div>								
-			</div>
-		</div>			  
-
 		<div class="row">
 			<div class="col s12">
 				<div class="section">
-					<h5><b>Gestor de Contenidos</b></h5>
+					<h5><b>Gestor de Noticias</b></h5>
 				</div>
 				
-				<table class="responsive-table highlight bordered centered">
+				<table class="responsive-table highlight bordered ">
 					<thead>
 						<tr>
-							<th>Fecha</th>
+							<th class="center">Fecha</th>
 							<th>Título</th>
 							<th>Texto</th>
-							<th>Posición</th>
 							<th>Autor</th>
-							<th>Estado</th>
-							<th>Editar</th>  
-							<th>Eliminar</th>	
+							<th class="center">Posición</th>
+							<th class="center">Estado</th>
+							<th class="center">Editar</th>  
+							<th class="center">Eliminar</th>	
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>02/03/2017</td>
-							<td>Titular de la Noticia</td>
-							<td>Lorem ipsum dolor sit amet....</td>
-							<td>1</td>
-							<td>Adrián Lopez Palacios</td>
-							<td>Publicado</td>
-							<td><i class="material-icons blue-text">edit</i></td>
-							<td><i class="material-icons red-text">delete</i></td>
-						</tr>
-						<tr>
-							<td>02/03/2017</td>
-							<td>Titular de la Noticia</td>
-							<td>Lorem ipsum dolor sit amet....</td>
-							<td>2</td>
-							<td>Adrián Lopez Palacios</td>
-							<td>Publicado</td>
-							<td><i class="material-icons blue-text">edit</i></td>
-							<td><i class="material-icons red-text">delete</i></td>
-						</tr>
-						<tr>
-							<td>02/03/2017</td>
-							<td>Titular de la Noticia</td>
-							<td>Lorem ipsum dolor sit amet....</td>
-							<td>2</td>
-							<td>Adrián Lopez Palacios</td>
-							<td>Publicado</td>
-							<td><i class="material-icons blue-text">edit</i></td>
-							<td><i class="material-icons red-text">delete</i></td>
-						</tr>
-						<tr>
-							<td>02/03/2017</td>
-							<td>Titular de la Noticia</td>
-							<td>Lorem ipsum dolor sit amet....</td>
-							<td>2</td>
-							<td>Adrián Lopez Palacios</td>
-							<td>Publicado</td>
-							<td><i class="material-icons blue-text">edit</i></td>
-							<td><i class="material-icons red-text">delete</i></td>
-						</tr>
-						<tr>
-							<td>02/03/2017</td>
-							<td>Titular de la Noticia</td>
-							<td>Lorem ipsum dolor sit amet....</td>
-							<td>2</td>
-							<td>Adrián Lopez Palacios</td>
-							<td>Publicado</td>
-							<td><i class="material-icons blue-text">edit</i></td>
-							<td><i class="material-icons red-text">delete</i></td>
-						</tr>
+					<tbody id="divAjaxGridNews">
 					</tbody>
 				</table>
 			</div>
 		</div>
-	
-		<ul class="pagination center">
-			<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-			<li class="active"><a href="#!">1</a></li>
-			<li class="waves-effect"><a href="#!">2</a></li>
-			<li class="waves-effect"><a href="#!">3</a></li>
-			<li class="waves-effect"><a href="#!">4</a></li>
-			<li class="waves-effect"><a href="#!">5</a></li>
-			<li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-		</ul>	
-	 
+		
+		<!-- Paginator -->
+		<div id="divPaginator" class="center"></div>
+		
+		<!-- Add Button -->
 		<div class="row">
 			<div class="col s12">
-				<a class="btn-floating btn-large waves-effect waves-light red right" href="#modal1"><i class="material-icons">add</i></a>	  
+				<a class="btn-floating btn-large waves-effect waves-light red right" href="javascript:void(0);" onclick="javascript:FxOpenModalPopupNewsJS(0);"><i class="material-icons">add</i></a>	  
 			</div>	
 		</div>
+		
+		<div id="divResponseAjaxPopupModal"></div>
+		<div id="divLoading"></div>
+		<input id="pageCount" name="pageCount" type="hidden" value="{{ pageCount }}">
+		<input id="UrlAjaxPopup" name="UrlAjaxPopup" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopup }}">
+		<input id="UrlAjaxGetGridPage" name="UrlAjaxGetGridPage" type="hidden" value="{{ arrayUrlAjax.UrlAjaxGetGridPage }}">
 	</main>
 	
 </body>
 
 	
 <script>
-	$(document).ready(function(){
-     $('.parallax').parallax();
-	 $(".dropdown-button").dropdown();
-	 $('select').material_select();
-	 $('.slider').slider({full_width: true, indicators: false});
-	 $('.tooltipped').tooltip({delay: 50});
-	 $('.collapsible').collapsible();
-	 $('.carousel.carousel-slider').carousel({full_width: true});
-	 $(".button-collapse").sideNav();
-    });       
+$(document).ready(function(){
+	//FxGetGridNews();
+});       
 </script>
-
-<script>
-  $('.modal').modal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
-      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
- 
-        console.log(modal, trigger);
-      },
-  
-    }
-  );
-</script>		
 	
 {% endblock %}

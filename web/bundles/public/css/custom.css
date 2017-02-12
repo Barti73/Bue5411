@@ -122,3 +122,78 @@ blockquote {
 .pagination li.active {
     background-color: #f44336;
 }
+
+.modalLoading {
+    position:   fixed;
+    z-index:    9999;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../images/loading.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+.pointerOnHover:hover{
+	cursor: pointer!important;
+}
+
+/****************************************************/
+/* INICIO: Fix para Plugin de Materialize Paginator */
+/****************************************************/
+.pagination li {
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: 0 10px;
+  line-height: 30px;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.pagination li a {
+  color: #444;
+}
+
+.pagination li.active a {
+  color: #fff;
+}
+
+.pagination li.active {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.pagination li.disabled a {
+  cursor: default;
+  color: #999;
+}
+
+.pagination li i {
+  font-size: 2.2rem;
+  vertical-align: middle;
+}
+
+.pagination li.pages ul li {
+  display: inline-block;
+  float: none;
+}
+
+@media only screen and (max-width: 992px) {
+  .pagination {
+    width: 100%;
+  }
+  .pagination li.prev,
+  .pagination li.next {
+    width: 10%;
+  }
+  .pagination li.pages {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+/*************************************************/
+/* FIN: Fix para Plugin de Materialize Paginator */
+/*************************************************/

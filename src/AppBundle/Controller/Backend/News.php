@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BL\Backend\NewsBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Constants\Bue5411Constants;
+use AppBundle\Constants\Codigo5411Constants;
 
 class News extends Controller
 {
@@ -25,46 +25,40 @@ class News extends Controller
     {
         $this->bl = new NewsBL($this->container);
         
-        return $this->render('Backend/NEWS.html.twig', array());
+        $arrayUrlAjax = $this->bl->getUrlAjax();
+        $linkHome = Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS;
+
+        //Count
+        $pageCount = $this->bl->getCountNews();
+        
+        return $this->render('Backend/news.html.twig', array('linkHome' => $linkHome,
+                                                             'pageCount' => $pageCount,
+                                                             'arrayUrlAjax' => $arrayUrlAjax));
     }
     
-//    public function mainConstructor(Request $request, $method = null, $notExists = null)
-//    {
-//        
-//        
-//        if (!$method) { $method = 'Login'; }
-//        return $this->$method($request, $notExists);
-//    }
+    /**
+     * @Route("/Backend/News/ajaxPopupNews")
+     */
+    public function ajaxPopupNews(Request $request)
+    {
+        $this->bl = new NewsBL($this->container);
+        
+        
+        return $this->render('Backend/news_popup.ajax.html.twig', array());
+    }
     
-//    public function testMethod()
-//    {
-//        return new Response(var_dump("TEST LoginRender"));
-//    }
-    
-//    
-//    public function LoginCheck($request, $notExists = null)
-//    {
-//        $txtUser = $request->request->get('txtUser');
-//        $txtPass = $request->request->get('txtPass');
-//
-//        $response = $this->bl->validateUser($txtUser, $txtPass);
-//        //return new response(var_dump($response));
-//        if ($response)
-//        {
-//            $session = $request->getSession();
-//            $session->set('userId', $response['userId']);
-//            $session->set('userNombre', $response['userNombre']);
-//            $session->set('userName', $response['userName']);
-//            $session->set('userPerfil', $response['userPerfil']);
-//            return $this->redirect(HeroGymConstants::URL_SITE.HeroGymConstants::REDIRECT_CONTROL_ACCESO);
-//        }
-//        else
-//        {
-//            $request->getSession()->invalidate(1);
-//            $notExists = "1";
-//            return $this->Login($request, $notExists);
-//        }
-//    }
-    
+    /**
+     * @Route("/Backend/News/ajaxGridNewsPage")
+     */
+    public function ajaxGridNewsPage(Request $request)
+    {
+        $this->bl = new NewsBL($this->container);
+        
+        $arrayData = $request->request->get('value');
+        
+        $noticias = $this->bl->getGridPage($arrayData);
+        
+        return $this->render('Backend/news_grid.ajax.html.twig', array('noticias' => $noticias));
+    }
     
 }
