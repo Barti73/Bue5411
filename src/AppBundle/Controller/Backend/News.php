@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BL\Backend\NewsBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Constants\Codigo5411Constants;
 
 class News extends Controller
 {
@@ -17,22 +16,28 @@ class News extends Controller
     {
         
     }
+    
+    public function mainConstructor()
+    {
+        $this->bl = new NewsBL($this->container);
+        $validSession = ($this->get('session')->get('userId') == null) ? 0 : 1;
+        return $validSession;
+    }
 
     /**
      * @Route("/Backend/News")
      */
     public function NewsIndex(Request $request)
     {
-        $this->bl = new NewsBL($this->container);
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
+        //URLs
         $arrayUrlAjax = $this->bl->getUrlAjax();
-        $linkHome = Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS;
-
         //Count
         $pageCount = $this->bl->getCountNews();
         
-        return $this->render('Backend/news.html.twig', array('linkHome' => $linkHome,
-                                                             'pageCount' => $pageCount,
+        return $this->render('Backend/news.html.twig', array('pageCount' => $pageCount,
                                                              'arrayUrlAjax' => $arrayUrlAjax));
     }
     
@@ -41,8 +46,8 @@ class News extends Controller
      */
     public function ajaxPopupNews(Request $request)
     {
-        $this->bl = new NewsBL($this->container);
-        
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
         return $this->render('Backend/news_popup.ajax.html.twig', array());
     }
@@ -52,7 +57,8 @@ class News extends Controller
      */
     public function ajaxGridNewsPage(Request $request)
     {
-        $this->bl = new NewsBL($this->container);
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
         $arrayData = $request->request->get('value');
         

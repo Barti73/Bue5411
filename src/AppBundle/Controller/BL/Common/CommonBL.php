@@ -42,5 +42,4 @@ class CommonBL
         return $this->em->getRepository('AppBundle:ParametrosConfiguracion')->findOneByNombre($nombre)->getValor();
     }
     
-    
 }

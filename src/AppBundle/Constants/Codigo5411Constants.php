@@ -20,6 +20,8 @@ class Codigo5411Constants
     const MENU_NEWS = '/Backend/News';
     
     //JS CONST (Ajax)
+    //Login
+    const AJAX_LOGIN_CHECK = "/Backend/Login/ajaxLoginCheck";
     //News
     const AJAX_POPUP_NEWS = "/Backend/News/ajaxPopupNews";
     const AJAX_GRID_PAGE = "/Backend/News/ajaxGridNewsPage";

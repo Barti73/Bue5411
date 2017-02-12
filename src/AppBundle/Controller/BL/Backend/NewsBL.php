@@ -37,10 +37,17 @@ class NewsBL extends Controller
         return $this->fx->decodeHash($noticiaIdHashed, self::newsSalt, 10);
     }
     
+    public function getUrlLogin()
+    {
+        return Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_LOGIN;
+    }
+    
     public function getUrlAjax()
     {
         $arrayUrlAjax = array('UrlAjaxPopup' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS,
-                              'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE);
+                              'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
+                              'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+                              'UrlLogin' => $this->getUrlLogin());
         return $arrayUrlAjax;
     }
     

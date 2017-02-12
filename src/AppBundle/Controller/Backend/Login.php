@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BL\Backend\LoginBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Constants\Codigo5411Constants;
 
 class Login extends Controller
 {
@@ -16,6 +15,15 @@ class Login extends Controller
     public function __construct()
     {
         
+    }
+    
+    public function mainConstructor()
+    {
+        $this->bl = new LoginBL($this->container);
+        $this->get('session')->remove('userId');
+        $this->get('session')->remove('userNombre');
+        $this->get('session')->remove('userName');
+        $this->get('session')->remove('userPerfil');
     }
     
     /**
@@ -27,59 +35,45 @@ class Login extends Controller
     }
 
     /**
-     * @Route("/Backend/Login/{notExists}")
+     * @Route("/Backend/Login")
      */
-    public function Login(Request $request, $notExists = null)
+    public function Login(Request $request)
     {
-        $this->bl = new LoginBL($this->container);
+        $this->mainConstructor();
         
-        $this->get('session')->remove('userId');
-        $this->get('session')->remove('userNombre');
-        $this->get('session')->remove('userName');
-        $this->get('session')->remove('userPerfil');
+        $arrayUrlAjax = $this->bl->getUrlAjax();
         
-        $formAction = Codigo5411Constants::URL_SITE.Codigo5411Constants::REDIRECT_LOGIN_CHECK;
-        return $this->render('Backend/login.html.twig', array('formAction' => $formAction,
-                                                              'notExists' => $notExists));
+        return $this->render('Backend/login.html.twig', array('arrayUrlAjax' => $arrayUrlAjax));
     }
     
-//    public function mainConstructor(Request $request, $method = null, $notExists = null)
-//    {
-//        
-//        
-//        if (!$method) { $method = 'Login'; }
-//        return $this->$method($request, $notExists);
-//    }
+    /**
+     * @Route("/Backend/Login/ajaxLoginCheck")
+     */
+    public function ajaxLoginCheck(Request $request)
+    {
+        $this->mainConstructor();
+        
+        $arrayData = $request->request->get('value');
+
+        $user = $this->bl->validateUser($arrayData);
+
+        if ($user)
+        {
+            $session = $request->getSession();
+            $session->set('userId', $user['userId']);
+            $session->set('userNombre', $user['userNombre']);
+            $session->set('userName', $user['userName']);
+            $session->set('userPerfil', $user['userPerfil']);
+            $response = '1';
+        }
+        else
+        {
+            $request->getSession()->invalidate(1);
+            $response = '0';
+        }
+        return new response($response);
+    }
     
-//    public function testMethod()
-//    {
-//        return new Response(var_dump("TEST LoginRender"));
-//    }
-    
-//    
-//    public function LoginCheck($request, $notExists = null)
-//    {
-//        $txtUser = $request->request->get('txtUser');
-//        $txtPass = $request->request->get('txtPass');
-//
-//        $response = $this->bl->validateUser($txtUser, $txtPass);
-//        //return new response(var_dump($response));
-//        if ($response)
-//        {
-//            $session = $request->getSession();
-//            $session->set('userId', $response['userId']);
-//            $session->set('userNombre', $response['userNombre']);
-//            $session->set('userName', $response['userName']);
-//            $session->set('userPerfil', $response['userPerfil']);
-//            return $this->redirect(HeroGymConstants::URL_SITE.HeroGymConstants::REDIRECT_CONTROL_ACCESO);
-//        }
-//        else
-//        {
-//            $request->getSession()->invalidate(1);
-//            $notExists = "1";
-//            return $this->Login($request, $notExists);
-//        }
-//    }
     
     
 }
