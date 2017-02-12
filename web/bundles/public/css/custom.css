@@ -16,6 +16,9 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+	background-image: url('../images/ciudad.png');
+	background-position: bottom;
+	background-repeat: no-repeat;	
   }
 
   main {
@@ -32,6 +35,7 @@
  ul.share-buttons{
   list-style: none;
   padding: 0;
+  padding-top: 6px;
 }
 
 ul.share-buttons li{
@@ -51,7 +55,7 @@ ul.share-buttons .sr-only {
 
 .social-header{
 	margin-left: 15px;
-	float:left;
+	/*float:left;*/
    margin-top:7px;
 }	
 
@@ -61,6 +65,7 @@ ul.share-buttons .sr-only {
     margin-top: 26px;
     font-weight: 300;
 	border-left: solid 3px #1565c0;
+	font-size: 0.9em;
 }
 
 .dateDay{
@@ -73,7 +78,7 @@ ul.share-buttons .sr-only {
 }
 
 .socialDateContent{
-	width:300px;
+	/*width:300px;*/
 	margin: 0 auto;
 }
 
@@ -121,4 +126,21 @@ blockquote {
 
 .pagination li.active {
     background-color: #f44336;
+}
+
+.margingBottomNull{
+	margin-bottom:0!important;
+}
+
+footer.page-footer {
+	padding-top:0 !important;
+}
+
+
+footer.page-footer .footer-copyright {
+	background-color: #ad1457 !important;
+}
+
+.ciudadBg{
+	
 }
