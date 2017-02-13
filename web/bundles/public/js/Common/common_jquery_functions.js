@@ -12,6 +12,7 @@ function FxSetPopupJS(result)
 		startingTop: '4%', // Starting top style attribute
 		endingTop: '10%', // Ending top style attribute
 		ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+			FxPopupModalReady();
 			},
 		complete: function() {
 			} // Callback for Modal close
@@ -27,6 +28,8 @@ function FxSetPopupJS(result)
 	FxSetDatepicker();	
 	//Tabs
 	$('ul.tabs').tabs();
+	//TextArea
+	$('.materialize-textarea').trigger('autoresize');
 }
 
 //Materialize Initialization

@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use AppBundle\Functions\PHPFunctions;
 use AppBundle\Constants\Codigo5411Constants;
 use AppBundle\Controller\BL\Common\CommonBL;
+use AppBundle\Controller\BL\Common\NoticiaBL;
 
 class NewsBL extends Controller
 {
@@ -27,16 +28,6 @@ class NewsBL extends Controller
         $this->fx = new PHPFunctions();
     }
 
-    public function getNewsIdHashed($noticiaId)
-    {
-        return $this->fx->encodeHash($noticiaId, self::newsSalt, 10);
-    }
-            
-    public function getNewsIdFromHashed($noticiaIdHashed)
-    {
-        return $this->fx->decodeHash($noticiaIdHashed, self::newsSalt, 10);
-    }
-    
     public function getUrlLogin()
     {
         return Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_LOGIN;
@@ -69,8 +60,10 @@ class NewsBL extends Controller
     public function getGridPage($arrayData)
     {
         $selectedPage = $arrayData["pageNumber"];
-        
+        //BL's
         $commonBL = new CommonBL($this->container);
+        $noticiaBL = new NoticiaBL($this->container);
+        
         $recordsPerPage = $commonBL->getResultsPerPage();
         $offset = ($selectedPage == 1) ? 0 : ($selectedPage - 1) * $recordsPerPage ;
 
@@ -85,19 +78,40 @@ class NewsBL extends Controller
         $arrayResponse = array();
         foreach ($noticias as $noticia)
         {
-            $textoShort = substr($noticia->getTexto(), 0, 300)."...";
-            $arrayResponse[] = array('hashedId' => $this->getNewsIdHashed($noticia->getId()),
-                                     'fecha' => $noticia->getFecha()->format('d/m/Y H:i'),
-                                     'titulo' => $noticia->getTitulo(),
-                                     'texto' => $noticia->getTexto(),
-                                     'textoShort' => $textoShort,
-                                     'posicion' => $noticia->getPosicion(),
-                                     'autor' => $noticia->getIdUsuario()->getNombre(),
-                                     'estado' => $noticia->getEstado());
+            $arrayResponse[] = $noticiaBL->getNoticiaData($noticia);
         }
         
         return $arrayResponse;
     }
-            
     
+    public function getNoticiaPopup($arrayData)
+    {
+        $response = array();
+        //BL
+        $noticiaBL = new NoticiaBL($this->container);
+        
+        $noticiaIdHashed = $arrayData["noticiaIdHashed"];
+        
+        if (!$noticiaIdHashed) //Nueva Noticia
+        {
+            $noticiaData = $noticiaBL->getNoticiaData(null);
+            $response = array('titulo' => 'Cargar Nueva Noticia',
+                              'class' => '',
+                              'noticiaData' => $noticiaData,
+                              'operacion' => 'insert');
+        }
+        else //Editar Noticia
+        {
+            $noticiaId = $noticiaBL->getNoticiaIdFromHashed($noticiaIdHashed);
+            $noticia = $this->em->getRepository('AppBundle:Noticia')->find($noticiaId);
+            $noticiaData = $noticiaBL->getNoticiaData($noticia);
+
+            $response = array('titulo' => 'Editar Noticia',
+                              'class' => 'active',
+                              'noticiaData' => $noticiaData,
+                              'operacion' => 'update');
+        }
+        return $response;
+    }
+            
 }

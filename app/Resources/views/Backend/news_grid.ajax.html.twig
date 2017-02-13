@@ -5,9 +5,12 @@
 							<td>{{ noticia.textoShort }}</td>
 							<td>{{ noticia.autor }}</td>
 							<td class="center">{{ noticia.posicion }}</td>
-							<td class="center">{{ noticia.estado }}</td>
+							<td class="center">{{ noticia.estadoTexto }}</td>
 							<td class="center">
-								<i class="pointerOnHover material-icons blue-text" onclick="javascript:FxEditNews('{{ noticia.hashedId }}');">edit</i>
+								<i class="pointerOnHover material-icons blue-text" onclick="javascript:FxOpenModalNewsViewJS('{{ noticia.hashedId }}');">remove_red_eye</i>
+							</td>
+							<td class="center">
+								<i class="pointerOnHover material-icons blue-text" onclick="javascript:FxOpenModalPopupNewsJS('{{ noticia.hashedId }}');">edit</i>
 							</td>
 							<td class="center">
 								<i class="pointerOnHover material-icons red-text" onclick="javascript:FxDeleteNews('{{ noticia.hashedId }}');">delete</i>

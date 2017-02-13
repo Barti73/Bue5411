@@ -49,7 +49,11 @@ class News extends Controller
         $validSession = $this->mainConstructor();
         if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
-        return $this->render('Backend/news_popup.ajax.html.twig', array());
+        $arrayData = $request->request->get('value');
+        
+        $popupData = $this->bl->getNoticiaPopup($arrayData);
+                
+        return $this->render('Backend/news_popup.ajax.html.twig', array('popupData' => $popupData));
     }
     
     /**

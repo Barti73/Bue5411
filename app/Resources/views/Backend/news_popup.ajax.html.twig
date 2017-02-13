@@ -1,6 +1,6 @@
 		<div id="modalPopup" class="modal">
 			<div class="modal-content">
-				<h5><b>Cargar Noticia</b></h5>
+				<h5><b>{{ popupData.titulo }}</b></h5>
 				<div class="divider"></div>
 				<div class="section">
 				
@@ -8,14 +8,22 @@
 						<form class="col s12">
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="input_text" type="text" data-length="100">
-									<label for="input_text">Título</label>
+									<input id="txtTitulo" type="text" data-length="100" value="{{ popupData.noticiaData.titulo }}">
+									<label for="txtTitulo" class="{{ popupData.class }}">Título</label>
 								</div>
 							</div>
+							{% if popupData.operacion == 'update' %}
 							<div class="row">
 								<div class="input-field col s12">
-									<textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
-									<label for="textarea1">Texto</label>
+									<input id="txtFecha" type="text" data-length="100" value="{{ popupData.noticiaData.fecha }}">
+									<label for="txtFecha" class="{{ popupData.class }}">Fecha</label>
+								</div>
+							</div>
+							{% endif %}
+							<div class="row">
+								<div class="input-field col s12">
+									<textarea id="textTexto" class="materialize-textarea" data-length="">{{ popupData.noticiaData.texto }}</textarea>
+									<label for="textTexto" class="{{ popupData.class }}">Texto</label>
 								</div>
 							</div>
 						</form>
@@ -29,19 +37,19 @@
 								<br>
 								<div class="row">
 									<div class="col s12">
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule1">M1</a>
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule2 right">M2</a>
+										<a id="btnModule1" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule1" onclick="javascript:FxSelectNoticiaModulo(this);">M1</a>
+										<a id="btnModule2" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule2 right" onclick="javascript:FxSelectNoticiaModulo(this);">M2</a>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col s12">
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule3">M3</a>
+										<a id="btnModule3" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule3" onclick="javascript:FxSelectNoticiaModulo(this);">M3</a>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col s12">
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule4">M4</a>
-										<a class="waves-effect waves-light btn-large blue darken-3 BtnModule5 right">M5</a>
+										<a id="btnModule4" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule4" onclick="javascript:FxSelectNoticiaModulo(this);">M4</a>
+										<a id="btnModule5" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule5 right" onclick="javascript:FxSelectNoticiaModulo(this);">M5</a>
 									</div>	
 								</div>
 							</div>
@@ -52,7 +60,7 @@
 						<div class="col s12">	
 							<h5>Subir Fotografía</h5>						
 							<div class="divider"></div>	
-							<p class="grey-text lighten-2">*Sólo válidos para M1 y M2</p>									
+							<p class="grey-text lighten-2">* Sólo visibles para M1, M2 y M3</p>									
 							<div class="section"></div>
 							<form action="#">
 								<div class="file-field input-field">
@@ -61,7 +69,7 @@
 										<input type="file" multiple>
 									</div>
 									<div class="file-path-wrapper">
-										<input class="file-path validate" type="text" placeholder="Subir Fotografìa">
+										<input class="file-path validate" type="text" placeholder="Subir Fotografía">
 									</div>
 								</div>
 							</form>
@@ -75,5 +83,6 @@
 					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
 				</div>								
 			</div>
-		</div>			  
+		</div>
+		<input id="btnModuleSelected" name="btnModuleSelected" type="hidden" value="btnModule{{ popupData.noticiaData.posicion }}">		
 
