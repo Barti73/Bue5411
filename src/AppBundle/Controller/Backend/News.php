@@ -71,4 +71,27 @@ class News extends Controller
         return $this->render('Backend/news_grid.ajax.html.twig', array('noticias' => $noticias));
     }
     
+    /**
+     * @Route("/Backend/News/ajaxSaveNews")
+     */
+    public function ajaxSaveNews(Request $request)
+    {
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
+        
+        $noticiaIdHashed = $request->request->get('noticiaIdHashed');
+        $titulo = $request->request->get('titulo');
+        $texto = $request->request->get('texto');
+        $posicion = $request->request->get('posicion');
+        $fileObject = $request->files->get('fileImage');
+        
+        $arrayData = array('noticiaIdHashed' => $noticiaIdHashed,
+                           'titulo' => $titulo,
+                           'texto' => $texto,
+                           'posicion' => $posicion);
+        
+        $response = $this->bl->saveNews($arrayData, $fileObject);
+        return new Response(var_dump($response));
+    }
+    
 }

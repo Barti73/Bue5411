@@ -9,21 +9,21 @@
 							<div class="row">
 								<div class="input-field col s12">
 									<input id="txtTitulo" type="text" data-length="100" value="{{ popupData.noticiaData.titulo }}">
-									<label for="txtTitulo" class="{{ popupData.class }}">Título</label>
+									<label for="txtTitulo" class="{{ popupData.class }}">Título (*)</label>
 								</div>
 							</div>
 							{% if popupData.operacion == 'update' %}
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="txtFecha" type="text" data-length="100" value="{{ popupData.noticiaData.fecha }}">
+									<input id="txtFecha" type="text" data-length="100" value="{{ popupData.noticiaData.fecha }}" readonly>
 									<label for="txtFecha" class="{{ popupData.class }}">Fecha</label>
 								</div>
 							</div>
 							{% endif %}
 							<div class="row">
 								<div class="input-field col s12">
-									<textarea id="textTexto" class="materialize-textarea" data-length="">{{ popupData.noticiaData.texto }}</textarea>
-									<label for="textTexto" class="{{ popupData.class }}">Texto</label>
+									<textarea id="txtTexto" class="materialize-textarea" data-length="">{{ popupData.noticiaData.texto }}</textarea>
+									<label for="txtTexto" class="{{ popupData.class }}">Texto (*)</label>
 								</div>
 							</div>
 						</form>
@@ -62,11 +62,11 @@
 							<div class="divider"></div>	
 							<p class="grey-text lighten-2">* Sólo visibles para M1, M2 y M3</p>									
 							<div class="section"></div>
-							<form action="#">
+							<form id="formUploadImage" method="post" action="" enctype="multipart/form-data" >
 								<div class="file-field input-field">
 									<div class="btn blue darken-3">
 										<span>Subir</span>
-										<input type="file" multiple>
+										<input id="fileImage" name="fileImage" type="file">
 									</div>
 									<div class="file-path-wrapper">
 										<input class="file-path validate" type="text" placeholder="Subir Fotografía">
@@ -79,10 +79,11 @@
 				</div>
 				
 				<div class="modal-footer">
-					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat ble">Cancelar</a>
-					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Guardar</a>
+					<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-green btn-flat ble">Cancelar</a>
+					<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="javascript:FxSaveNewsJS();">Guardar</a>
 				</div>								
 			</div>
 		</div>
+		<input id="hiddenNoticiaIdHashed" name="hiddenNoticiaIdHashed" type="hidden" value="{{ popupData.noticiaData.hashedId }}">		
 		<input id="btnModuleSelected" name="btnModuleSelected" type="hidden" value="btnModule{{ popupData.noticiaData.posicion }}">		
 

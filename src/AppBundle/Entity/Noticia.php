@@ -30,6 +30,11 @@ class Noticia
     private $fecha;
 
     /**
+     * @var string
+     */
+    private $imagen;
+
+    /**
      * @var integer
      */
     private $estado;
@@ -135,6 +140,29 @@ class Noticia
     public function getFecha()
     {
         return $this->fecha;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param string $imagen
+     * @return Noticia
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
     }
 
     /**

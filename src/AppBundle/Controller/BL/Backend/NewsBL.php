@@ -3,8 +3,12 @@
 namespace AppBundle\Controller\BL\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Functions\PHPFunctions;
+use AppBundle\Functions\ImageResize;
 use AppBundle\Constants\Codigo5411Constants;
 use AppBundle\Controller\BL\Common\CommonBL;
 use AppBundle\Controller\BL\Common\NoticiaBL;
@@ -18,7 +22,6 @@ class NewsBL extends Controller
     protected $em;
     protected $fx;
 
-    const newsSalt = "newsSalt";
     protected $container;
     
     public function __construct($container)
@@ -37,6 +40,7 @@ class NewsBL extends Controller
     {
         $arrayUrlAjax = array('UrlAjaxPopup' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS,
                               'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
+                              'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
                               'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
                               'UrlLogin' => $this->getUrlLogin());
         return $arrayUrlAjax;
@@ -113,5 +117,11 @@ class NewsBL extends Controller
         }
         return $response;
     }
-            
+
+    public function saveNews($arrayData, $fileObject = null)
+    {
+        $imageFolder = $this->container->get('kernel')->getRootDir().Codigo5411Constants::IMAGES_FOLDER;
+        return $imageFolder;
+        
+    }
 }

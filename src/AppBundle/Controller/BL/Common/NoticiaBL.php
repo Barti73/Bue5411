@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\Noticia;
+use AppBundle\Entity\NoticiaLog;
 use AppBundle\Functions\PHPFunctions;
 use AppBundle\Constants\Codigo5411Constants;
 
@@ -77,6 +79,76 @@ class NoticiaBL
             
         }
         return $response;
-        
     }
+    
+    public function insertNoticia($arrayData)
+    {
+        //Entity
+        $usuario = $this->em->getRepository('AppBundle:Usuario')->find($arrayData["usuarioId"]);
+        //Fecha
+        $newDate = new \DateTime(date("Y-m-d H:i:s"));
+                
+        //Insert Noticia
+        $noticia = new Noticia();
+        $noticia->setIdUsuario($usuario);
+        $noticia->setTitulo($arrayData["titulo"]);
+        $noticia->setTexto($arrayData["texto"]);
+        $noticia->setPosicion($arrayData["posicion"]);
+        $noticia->setFecha($newDate);
+        $noticia->setImagen($arrayData["imagen"]);
+        $noticia->setEstado($arrayData["estado"]);
+        $this->em->persist($noticia);
+        $this->em->flush();
+        
+        return $noticia->getId();
+    }
+    
+    public function updateNoticia($arrayData)
+    {
+        //Entity
+        $usuario = $this->em->getRepository('AppBundle:Usuario')->find($arrayData["usuarioId"]);
+        //Fecha
+        $newDate = new \DateTime(date("Y-m-d H:i:s"));
+
+        //Update Noticia
+        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($arrayData["noticiaId"]);
+        $noticia->setIdUsuario($usuario);
+        $noticia->setTitulo($arrayData["titulo"]);
+        $noticia->setTexto($arrayData["texto"]);
+        $noticia->setPosicion($arrayData["posicion"]);
+        $noticia->setFecha($newDate);
+        $noticia->setImagen($arrayData["imagen"]);
+        $noticia->setEstado($arrayData["estado"]);
+        $this->em->persist($noticia);
+        $this->em->flush();
+        
+        return $noticia->getId();
+    }
+    
+    public function insertNoticiaLog($arrayData)
+    {
+        //Entity
+        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($arrayData["noticiaId"]);
+        $usuario = $this->em->getRepository('AppBundle:Usuario')->find($arrayData["usuarioId"]);
+        //Fecha
+        $newDate = new \DateTime(date("Y-m-d H:i:s"));
+                
+        //Insert Noticia
+        $noticiaLog = new NoticiaLog();
+        $noticiaLog->setIdNoticia($noticia);
+        $noticiaLog->setIdUsuario($usuario);
+        $noticiaLog->setTitulo($arrayData["titulo"]);
+        $noticiaLog->setTexto($arrayData["texto"]);
+        $noticiaLog->setPosicion($arrayData["posicion"]);
+        $noticiaLog->setFecha($newDate);
+        $noticiaLog->setImagen($arrayData["imagen"]);
+        $noticiaLog->setEstado($arrayData["estado"]);
+        $noticiaLog->setOperacion($arrayData["operacion"]);
+        $this->em->persist($noticiaLog);
+        $this->em->flush();
+        
+        return $noticiaLog->getId();
+    }
+    
+    
 }

@@ -8,9 +8,10 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="titulo" type="string" column="titulo" length="100" nullable="false"/>
-    <field name="texto" type="string" column="texto" length="3000" nullable="false"/>
+    <field name="texto" type="text" column="texto" nullable="false"/>
     <field name="posicion" type="integer" column="posicion" nullable="false"/>
     <field name="fecha" type="datetime" column="fecha" nullable="false"/>
+    <field name="imagen" type="string" column="imagen" length="100" nullable="true"/>
     <field name="estado" type="integer" column="estado" nullable="false"/>
     <many-to-one field="idUsuario" target-entity="Usuario">
       <join-columns>

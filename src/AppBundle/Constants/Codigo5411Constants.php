@@ -25,7 +25,10 @@ class Codigo5411Constants
     //News
     const AJAX_POPUP_NEWS = "/Backend/News/ajaxPopupNews";
     const AJAX_GRID_PAGE = "/Backend/News/ajaxGridNewsPage";
+    const AJAX_SAVE_NEWS = "/Backend/News/ajaxSaveNews";
     
+    //Files
+    const IMAGES_FOLDER = "/../web/bundles/public/upload/";
 }
 
 

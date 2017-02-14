@@ -30,6 +30,11 @@ class NoticiaLog
     private $fecha;
 
     /**
+     * @var string
+     */
+    private $imagen;
+
+    /**
      * @var integer
      */
     private $estado;
@@ -45,14 +50,14 @@ class NoticiaLog
     private $id;
 
     /**
-     * @var \AppBundle\Entity\Noticia
-     */
-    private $idNoticia;
-
-    /**
      * @var \AppBundle\Entity\Usuario
      */
     private $idUsuario;
+
+    /**
+     * @var \AppBundle\Entity\Noticia
+     */
+    private $idNoticia;
 
 
     /**
@@ -148,6 +153,29 @@ class NoticiaLog
     }
 
     /**
+     * Set imagen
+     *
+     * @param string $imagen
+     * @return NoticiaLog
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string 
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    /**
      * Set estado
      *
      * @param integer $estado
@@ -204,29 +232,6 @@ class NoticiaLog
     }
 
     /**
-     * Set idNoticia
-     *
-     * @param \AppBundle\Entity\Noticia $idNoticia
-     * @return NoticiaLog
-     */
-    public function setIdNoticia(\AppBundle\Entity\Noticia $idNoticia = null)
-    {
-        $this->idNoticia = $idNoticia;
-
-        return $this;
-    }
-
-    /**
-     * Get idNoticia
-     *
-     * @return \AppBundle\Entity\Noticia 
-     */
-    public function getIdNoticia()
-    {
-        return $this->idNoticia;
-    }
-
-    /**
      * Set idUsuario
      *
      * @param \AppBundle\Entity\Usuario $idUsuario
@@ -247,5 +252,28 @@ class NoticiaLog
     public function getIdUsuario()
     {
         return $this->idUsuario;
+    }
+
+    /**
+     * Set idNoticia
+     *
+     * @param \AppBundle\Entity\Noticia $idNoticia
+     * @return NoticiaLog
+     */
+    public function setIdNoticia(\AppBundle\Entity\Noticia $idNoticia = null)
+    {
+        $this->idNoticia = $idNoticia;
+
+        return $this;
+    }
+
+    /**
+     * Get idNoticia
+     *
+     * @return \AppBundle\Entity\Noticia 
+     */
+    public function getIdNoticia()
+    {
+        return $this->idNoticia;
     }
 }

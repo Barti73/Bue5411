@@ -116,9 +116,9 @@ function exeAjaxCallBack(URL, strData, strDivResponse, functionCallback)
 
 function exeAjaxUploadFileCallBack(URL, strData, strDivResponse, functionCallback)
 {
+	ShowLoading('divLoading');
 	var divResponse = $('#' + strDivResponse);
 	
-	divResponse.html('<span style="font-style: italic">Procesando...</span>');
     $.ajax({
       type: 'POST',
       url: URL,
@@ -129,13 +129,13 @@ function exeAjaxUploadFileCallBack(URL, strData, strDivResponse, functionCallbac
 	  cache: false,             // To unable request pages to be cached
 	  processData:false,        // To send DOMDocument or non processed data file it is set to false	  
       success: function(result) {
-		//console.log(result);
-		divResponse.html(result);
-        functionCallback(result);
+		  HideLoading('divLoading');
+		  divResponse.html(result);
+		  functionCallback(result);
       },
       error: function() {
-          sweetAlert('Error', 'Ocurrió un error al intentar realizar la subida del archivo seleccionado.', 'error');
-		  $('#ajaxLoadingDiv').removeClass('ajaxLoadingDivShow'); //Loading Div Hide
+		  HideLoading('divLoading');
+		  sweetAlert('Error', 'Ocurrió un error al intentar realizar la subida del archivo seleccionado.', 'error');
       }
     });
 }
