@@ -40,20 +40,35 @@ class News extends Controller
         return $this->render('Backend/news.html.twig', array('pageCount' => $pageCount,
                                                              'arrayUrlAjax' => $arrayUrlAjax));
     }
-    
+
     /**
-     * @Route("/Backend/News/ajaxPopupNews")
+     * @Route("/Backend/News/ajaxPopupNewsView")
      */
-    public function ajaxPopupNews(Request $request)
+    public function ajaxPopupNewsView(Request $request)
     {
         $validSession = $this->mainConstructor();
         if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
         $arrayData = $request->request->get('value');
         
-        $popupData = $this->bl->getNoticiaPopup($arrayData);
+        $popupData = $this->bl->getNoticia($arrayData);
                 
-        return $this->render('Backend/news_popup.ajax.html.twig', array('popupData' => $popupData));
+        return $this->render('Common/news_popup_view.ajax.html.twig', array('popupData' => $popupData));
+    }
+    
+    /**
+     * @Route("/Backend/News/ajaxPopupNewsAddEdit")
+     */
+    public function ajaxPopupNewsAddEdit(Request $request)
+    {
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
+        
+        $arrayData = $request->request->get('value');
+        
+        $popupData = $this->bl->getNoticia($arrayData);
+                
+        return $this->render('Backend/news_popup_add_edit.ajax.html.twig', array('popupData' => $popupData));
     }
     
     /**

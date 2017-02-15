@@ -23,12 +23,17 @@ class Codigo5411Constants
     //Login
     const AJAX_LOGIN_CHECK = "/Backend/Login/ajaxLoginCheck";
     //News
-    const AJAX_POPUP_NEWS = "/Backend/News/ajaxPopupNews";
+    const AJAX_POPUP_NEWS_ADD_EDIT = "/Backend/News/ajaxPopupNewsAddEdit";
+    const AJAX_POPUP_NEWS_VIEW = "/Backend/News/ajaxPopupNewsView";
     const AJAX_GRID_PAGE = "/Backend/News/ajaxGridNewsPage";
     const AJAX_SAVE_NEWS = "/Backend/News/ajaxSaveNews";
     
     //Files
-    const IMAGES_FOLDER = "/../web/bundles/public/upload/";
+    const IMAGES_FOLDER = "/../web/bundles/public/upload/news/";
+    
+    //Image Size
+    const NEWS_WIDTH = 1600;
+    const NEWS_HEIGHT = 900;
 }
 
 

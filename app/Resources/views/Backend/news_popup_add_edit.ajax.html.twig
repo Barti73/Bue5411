@@ -56,6 +56,22 @@
 						</div>
 					</div>
 					
+					{% if popupData.operacion == 'update' and popupData.noticiaData.imagen %}
+					<div class="divider"></div>
+					<div class="row"></div>
+					<div class="row">
+						<div class="col s12" style="">
+							<ul class="collapsible" data-collapsible="accordion">
+								<li>
+									<div class="collapsible-header"><i class="material-icons blue-text">image</i>Ver imagen actual</div>
+									<div class="collapsible-body"><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}" style="filter: grayscale();" width="40%"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					{% endif %}
+					
+					
 					<div class="row">
 						<div class="col s12">	
 							<h5>Subir Fotografía</h5>						

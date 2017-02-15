@@ -1,9 +1,19 @@
 /* Javascript Functions */
 
-function FxOpenModalPopupNewsJS(noticiaIdHashed)
+function FxOpenModalNewsViewJS(noticiaIdHashed)
 {
 	var jsonArray = { "noticiaIdHashed": noticiaIdHashed };
-	var URL = $('#UrlAjaxPopup').val();
+	var URL = $('#UrlAjaxPopupNewsView').val();
+	var strData = { value: jsonArray };
+	var strDivResponse = 'divResponseAjaxPopupModal';
+	
+	exeAjaxCallBackLoadingSetResult(URL, strData, strDivResponse, FxSetPopupJS);
+}
+
+function FxOpenModalNewsAddEditJS(noticiaIdHashed)
+{
+	var jsonArray = { "noticiaIdHashed": noticiaIdHashed };
+	var URL = $('#UrlAjaxPopupNewsAddEdit').val();
 	var strData = { value: jsonArray };
 	var strDivResponse = 'divResponseAjaxPopupModal';
 	
@@ -73,5 +83,11 @@ function FxSaveNewsJS()
 	var URL = $('#UrlAjaxSaveNews').val();
 	var strData = formData;
 	var strDivResponse = 'divResponse';
-	exeAjaxUploadFileCallBack(URL, strData, strDivResponse, FxShowMessageSuccess);
+	exeAjaxUploadFileCallBack(URL, strData, strDivResponse, FxSaveNewsPostJS);
+}
+
+function FxSaveNewsPostJS()
+{
+	FxGetGridPage( $('#pageActual').val() );
+	FxShowMessageSuccess();
 }

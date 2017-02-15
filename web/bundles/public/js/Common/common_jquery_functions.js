@@ -30,6 +30,8 @@ function FxSetPopupJS(result)
 	$('ul.tabs').tabs();
 	//TextArea
 	$('.materialize-textarea').trigger('autoresize');
+	//Collapsibles
+	$('.collapsible').collapsible();
 }
 
 //Materialize Initialization
@@ -53,7 +55,7 @@ $(function() {
 		useUrlParameter: false,
 		onClickCallback: function(requestedPage) {
 			FxGetGridPage(requestedPage);
-			//console.log('Requested page from #pagination-long: ' + requestedPage);
+			$('#pageActual').val(requestedPage); //Almacenamos pagina actual
 		}
 	});
 });	 

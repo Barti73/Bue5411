@@ -38,7 +38,8 @@ class NewsBL extends Controller
     
     public function getUrlAjax()
     {
-        $arrayUrlAjax = array('UrlAjaxPopup' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS,
+        $arrayUrlAjax = array('UrlAjaxPopupNewsAddEdit' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_ADD_EDIT,
+                              'UrlAjaxPopupNewsView' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_VIEW,
                               'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
                               'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
                               'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
@@ -88,7 +89,7 @@ class NewsBL extends Controller
         return $arrayResponse;
     }
     
-    public function getNoticiaPopup($arrayData)
+    public function getNoticia($arrayData)
     {
         $response = array();
         //BL
@@ -120,8 +121,55 @@ class NewsBL extends Controller
 
     public function saveNews($arrayData, $fileObject = null)
     {
-        $imageFolder = $this->container->get('kernel')->getRootDir().Codigo5411Constants::IMAGES_FOLDER;
-        return $imageFolder;
+        //Preparamos News Data
+        //$arrayData contiene:
+        //array('noticiaIdHashed' => $noticiaIdHashed,
+        //      'titulo' => $titulo,
+        //      'texto' => $texto,
+        //      'posicion' => $posicion);
         
+        //Agregamos el usuario
+        $arrayData["usuarioId"] = $this->get('session')->get('userId');
+
+        //Insert noticia
+        $noticiaBL = new NoticiaBL($this->container);
+        $noticiaId = $noticiaBL->insertNoticia($arrayData);
+        
+        //Agregamos imagen si existe
+        if ($fileObject)
+        {
+            //Carpeta destino
+            $imageFolder = $this->container->get('kernel')->getRootDir().Codigo5411Constants::IMAGES_FOLDER;
+            //nombre archivo
+            $fileNameOrig = "noticia_".$noticiaBL->getNoticiaIdHashed($noticiaId)."_original.jpg";
+            $fileNameResize = "noticia_".$noticiaBL->getNoticiaIdHashed($noticiaId)."_1600x900.jpg";
+            
+            $fileObject->move($imageFolder, $fileNameOrig);
+            
+            //Resize
+            $fileOrig = $imageFolder.$fileNameOrig;
+            $fileResize = $imageFolder.$fileNameResize;
+            $newWidth = Codigo5411Constants::NEWS_WIDTH;
+            $newHeight = Codigo5411Constants::NEWS_HEIGHT;
+            
+            $imageResize = new ImageResize();
+            $imageResize->smartResizeImage($fileOrig, 
+                                           null, 
+                                           $newWidth,
+                                           $newHeight,
+                                           false,
+                                           $fileResize,
+                                           false,
+                                           false,
+                                           90,
+                                           false);
+            
+            //Actualizamos noticia[imagen]
+            $arrayImagen = array('noticiaId' => $noticiaId,
+                                 'imagen' => $fileNameResize);
+            $noticiaBL->updateNoticiaImagen($arrayImagen);
+        }
+        
+        return $noticiaId;
     }
 }

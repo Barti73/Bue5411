@@ -51,6 +51,7 @@ class NoticiaBL
                           'textoShort' => '',
                           'posicion' => '',
                           'autor' => '',
+                          'imagen' => '',
                           'estado' => '',
                           'estadoTexto' => '');
 
@@ -74,6 +75,7 @@ class NoticiaBL
                               'textoShort' => $textoShort,
                               'posicion' => $posicion,
                               'autor' => $noticia->getIdUsuario()->getNombre(),
+                              'imagen' => $noticia->getImagen(),
                               'estado' => $noticia->getEstado(),
                               'estadoTexto' => $estadoTexto);
             
@@ -95,8 +97,8 @@ class NoticiaBL
         $noticia->setTexto($arrayData["texto"]);
         $noticia->setPosicion($arrayData["posicion"]);
         $noticia->setFecha($newDate);
-        $noticia->setImagen($arrayData["imagen"]);
-        $noticia->setEstado($arrayData["estado"]);
+        $noticia->setImagen(null); //Se actualiza despues del upload de la imagen
+        $noticia->setEstado(3); //Borrador (1: Publicada, 2: No Publicada, 3: Borrador
         $this->em->persist($noticia);
         $this->em->flush();
         
@@ -120,6 +122,16 @@ class NoticiaBL
         $noticia->setImagen($arrayData["imagen"]);
         $noticia->setEstado($arrayData["estado"]);
         $this->em->persist($noticia);
+        $this->em->flush();
+        
+        return $noticia->getId();
+    }
+    
+    public function updateNoticiaImagen($arrayData)
+    {
+        //Update Noticia
+        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($arrayData["noticiaId"]);
+        $noticia->setImagen($arrayData["imagen"]);
         $this->em->flush();
         
         return $noticia->getId();

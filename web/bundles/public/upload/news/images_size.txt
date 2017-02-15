@@ -1,0 +1,5 @@
+M1: 1600x900 (ratio de 1.77)
+M2: 1600x900 (ratio de 1.77)
+M3: 1600x900 (ratio de 1.77)
+M4: Sin imagen
+M5: Sin imagen

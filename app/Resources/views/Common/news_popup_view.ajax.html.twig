@@ -1,0 +1,22 @@
+		<div id="modalPopup" class="modal">
+			<div class="modal-content">
+				<div class="titleNews">{{ popupData.noticiaData.titulo }}</div>
+				<!--<div class="copeteTxt">lorem ipsum dolor sit amet consectetur adipiscing elit sed</div>-->
+				{% if popupData.noticiaData.imagen %}
+				<div><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}" style="filter: grayscale();" width="100%"></div>
+				{% endif %}
+				<div>
+					<ul class="share-buttons">
+						<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
+						<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
+						<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+					</ul>
+				</div>	
+				<div class="divider"></div>
+				<div>
+					<p class="flow-text">{{ popupData.noticiaData.texto }}</p>
+					<blockquote><b>{{ popupData.noticiaData.autor }}</b></blockquote>
+				</div>
+			</div>
+		</div>
+

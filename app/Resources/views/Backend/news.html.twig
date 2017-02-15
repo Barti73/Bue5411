@@ -69,7 +69,7 @@
 		<!-- Add Button -->
 		<div class="row">
 			<div class="col s12">
-				<a class="btn-floating btn-large waves-effect waves-light red right" href="javascript:void(0);" onclick="javascript:FxOpenModalPopupNewsJS(0);"><i class="material-icons">add</i></a>	  
+				<a class="btn-floating btn-large waves-effect waves-light red right" href="javascript:void(0);" onclick="javascript:FxOpenModalNewsAddEditJS(0);"><i class="material-icons">add</i></a>	  
 			</div>	
 		</div>
 		
@@ -77,7 +77,9 @@
 		<div id="divLoading"></div>
 		<div id="divResponse" style="display: none;"></div>
 		<input id="pageCount" name="pageCount" type="hidden" value="{{ pageCount }}">
-		<input id="UrlAjaxPopup" name="UrlAjaxPopup" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopup }}">
+		<input id="pageActual" name="pageActual" type="hidden" value="">
+		<input id="UrlAjaxPopupNewsAddEdit" name="UrlAjaxPopupNewsAddEdit" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupNewsAddEdit }}">
+		<input id="UrlAjaxPopupNewsView" name="UrlAjaxPopupNewsView" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupNewsView }}">
 		<input id="UrlAjaxGetGridPage" name="UrlAjaxGetGridPage" type="hidden" value="{{ arrayUrlAjax.UrlAjaxGetGridPage }}">
 		<input id="UrlAjaxSaveNews" name="UrlAjaxSaveNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxSaveNews }}">
 	</main>
