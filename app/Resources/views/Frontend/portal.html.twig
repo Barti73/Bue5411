@@ -41,7 +41,7 @@
 		
 		<div class="container">	
 			<br>
-			<div class="row">
+			<div class="row hide-on-med-and-down">
 				<div class="col s12 l10 grey lighten-4">
 					<div class="row margingBottomNull">
 						<div class="col s6"> 
@@ -71,10 +71,24 @@
 				<div class="col s12 l7">
 					<div class="card">
 						<!--<a href="javascript:void(0);" onclick="javascript:FxOpenModal();">-->
-						<a href="#divModal">
+						<!--!a href="#divModal">-->
 							<div class="card-content">
 								<div class="titleNews">Noticia Titular 1</div>
-								<div class="copeteTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, libero et finibus pretium, nulla lacus tempus enim, vel fringilla turpis nunc sit amet nisl. Curabitur eget quam vitae enim porttitor venenatis.</div>
+								<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 120px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum non orci interdum cursus. 
+									Donec et condimentum nisl, nec interdum velit. Integer in mauris in arcu suscipit pharetra. Etiam ac blandit sem. 
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum faucibus pulvinar est, at accumsan justo aliquam a. 
+									Nullam vulputate purus vel diam sodales hendrerit. Etiam tristique lobortis turpis, auctor efficitur erat dignissim ut. 
+									Donec vel mi dictum, ullamcorper risus non, pretium urna.
+									Cras in nisl faucibus, bibendum augue vitae, ornare sapien. Sed ultricies fermentum malesuada. Maecenas at ante quis lorem blandit auctor. Suspendisse potenti. 
+									Mauris placerat enim in lorem pretium, fringilla facilisis risus eleifend. Donec dui dolor, fermentum sit amet nulla id, eleifend dictum nisl. 
+									Donec diam est, faucibus vitae rhoncus quis, tincidunt et nulla. Aliquam non tristique ipsum, vel fermentum tortor. Nullam vitae aliquet ante. 
+									Pellentesque posuere auctor ligula, in volutpat nibh porta eu. Proin fermentum orci et eros vulputate, nec dictum nulla feugiat.
+									Donec mattis, massa vitae luctus aliquet, orci dolor commodo lectus, et eleifend nisi mi sed lorem. Donec luctus odio id justo lacinia, vitae auctor quam mattis. 
+									Nullam congue urna dui. Phasellus varius ligula velit, eu pharetra tellus condimentum auctor. Nam vulputate ultricies diam, a faucibus enim ultricies at. 
+									Nulla faucibus scelerisque urna, vel egestas erat rhoncus vitae. Nam malesuada risus nibh, a scelerisque velit lobortis eget. Nullam luctus lacinia ligula. 
+									In hac habitasse platea dictumst. Proin molestie sagittis diam, vitae hendrerit libero viverra non. Nunc sodales erat tortor, eu rutrum neque tempor eu.
+									<a href="javascript:alert('Aca se abre modal noticia');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+								</div>
 								<div><img src="{{ asset('bundles/public/images/Congreso.jpg') }}" style="filter: grayscale();" width="100%"></div>		
 								<div>
 									<ul class="share-buttons">
@@ -84,7 +98,7 @@
 									</ul>
 								</div>
 							</div>
-						</a>
+						<!--</a>-->
 					</div>
 				</div>
 					
@@ -92,7 +106,10 @@
 					<div class="card">
 						<div class="card-content">
 							<div class="titleNews">Noticia Titular 2</div>
-							<div class="copeteTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, libero et finibus pretium, nulla lacus tempus enim, vel fringilla turpis nunc sit amet nisl.</div>
+							<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 120px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, 
+								libero et finibus pretium, nulla lacus tempus enim, vel fringilla turpis nunc sit amet nisl. Sed ultricies fermentum malesuada. Maecenas at ante quis lorem blandit auctor. Suspendisse potenti. 
+								<a href="javascript:alert('Aca se abre modal noticia');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+							</div>
 							<div><img src="{{ asset('bundles/public/images/delpo.jpg') }}" style="filter: grayscale();" width="100%"></div>		
 							<div>
 								<ul class="share-buttons">
@@ -206,6 +223,11 @@
 		$('.collapsible').collapsible();
 		$('.carousel.carousel-slider').carousel({full_width: true});
 		$('.button-collapse').sideNav();
+		
+		$('.ellipsisText').dotdotdot({
+			after: "a.readMore",
+			watch: "window",
+		});		
 	});
 
   $('.modal').modal({
