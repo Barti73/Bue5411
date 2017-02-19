@@ -64,12 +64,11 @@ ul.share-buttons .sr-only {
 	margin-left:10px;
 	margin-top: 26px;
 	font-weight: 300;
-	border-left: solid 3px #1565c0;
 	font-size: 0.9em;
 }
 
 .dateDay{
-	font-weight:bold;
+	font-weight:400;
 }
 
 .tiempo-widget{
@@ -83,12 +82,13 @@ ul.share-buttons .sr-only {
 }
 
 .titleNews{
-	font-size: 2.92rem;
+	font-size: 2.5rem;
     line-height: 110%;
-    margin: 1.46rem 0 1.168rem 0;
+    margin: 0 0 1.168rem 0;
 	color: rgba(0, 0, 0, 0.87);
 	font-weight:bold;
 }
+
 
 blockquote {
 	border-left: 5px solid #1565c0 !important ;
@@ -216,6 +216,69 @@ footer.page-footer .footer-copyright {
 	background-color: #ad1457 !important;
 }
 
-.ciudadBg{
-	
+/*ICONOS SOCIAL MEDIA*/
+/* hollow sm icons */
+a, a:hover {
+    text-decoration: none;
 }
+
+.socialbtns, .socialbtns ul, .socialbtns li {
+    margin: 0;
+    padding: 5px;
+	box-sizing: content-box;
+    text-align: center;
+}
+
+.socialbtns li {
+    list-style: none outside none;
+    display: inline-block;
+}
+
+.socialbtns .fa {
+    width: 40px;
+    height: 28px;
+    color: #FFF;
+    background-color: #ad1457;
+    padding-top: 12px;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+}
+
+.socialbtns .fa:hover {
+    transform: scale(1.2,1.2);
+    -moz-transform: scale(1.2,1.2);
+    -webkit-transform: scale(1.2,1.2);
+    -o-transform: scale(1.2,1.2);
+    transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+}
+
+.OtrasNoticias{
+	width:75% !important;
+	font-weight:300;
+	font-size:1.5em;
+}
+
+.OtrasNoticiasContent{
+	padding: 20px!important;
+}
+
+/*Container Custom*/
+
+.container {
+    width: 85%!important;
+}
+
+.card .card-content {
+    padding: 15px !important;
+    border-radius: 0 0 2px 2px;
+}
+
