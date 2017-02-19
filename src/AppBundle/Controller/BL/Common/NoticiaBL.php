@@ -53,7 +53,8 @@ class NoticiaBL
                           'autor' => '',
                           'imagen' => '',
                           'estado' => '',
-                          'estadoTexto' => '');
+                          'estadoTexto' => '',
+                          'rndNumber' => '');
 
         if ($noticia)
         {
@@ -77,7 +78,8 @@ class NoticiaBL
                               'autor' => $noticia->getIdUsuario()->getNombre(),
                               'imagen' => $noticia->getImagen(),
                               'estado' => $noticia->getEstado(),
-                              'estadoTexto' => $estadoTexto);
+                              'estadoTexto' => $estadoTexto,
+                              'rndNumber' => rand(1, 100));
             
         }
         return $response;
@@ -113,15 +115,15 @@ class NoticiaBL
         $newDate = new \DateTime(date("Y-m-d H:i:s"));
 
         //Update Noticia
-        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($arrayData["noticiaId"]);
+        $noticiaId = $this->getNoticiaIdFromHashed($arrayData["noticiaIdHashed"]);
+        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($noticiaId);
         $noticia->setIdUsuario($usuario);
         $noticia->setTitulo($arrayData["titulo"]);
         $noticia->setTexto($arrayData["texto"]);
         $noticia->setPosicion($arrayData["posicion"]);
         $noticia->setFecha($newDate);
-        $noticia->setImagen($arrayData["imagen"]);
-        $noticia->setEstado($arrayData["estado"]);
-        $this->em->persist($noticia);
+        //$noticia->setImagen($arrayData["imagen"]); //la imagen se actualiza por separado
+        //$noticia->setEstado($arrayData["estado"]); //Solo se cambia el estado al publicar
         $this->em->flush();
         
         return $noticia->getId();
@@ -137,8 +139,10 @@ class NoticiaBL
         return $noticia->getId();
     }
     
-    public function publishNoticia($noticiaId)
+    public function publishNoticia($noticiaIdHashed)
     {
+        $noticiaId = $this->getNoticiaIdFromHashed($noticiaIdHashed);
+        
         $noticia = $this->em->getRepository('AppBundle:Noticia')->find($noticiaId);
         $posicion = $noticia->getPosicion();
 
@@ -161,6 +165,20 @@ class NoticiaBL
         $noticia->setEstado(1); //Publicado
         $this->em->flush();
         return 'OK';
+    }
+    
+    public function deleteNoticia($noticiaIdHashed)
+    {
+        $noticiaId = $this->getNoticiaIdFromHashed($noticiaIdHashed);
+
+        //Noticia log
+        $noticiaLog = $this->em->getRepository('AppBundle:NoticiaLog')->find($noticiaId);
+        if ($noticiaLog) { $this->em->remove($noticiaLog); }
+        //Noticia
+        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($noticiaId);
+        $this->em->remove($noticia);
+        
+        $this->em->flush();
     }
     
     public function insertNoticiaLog($arrayData)

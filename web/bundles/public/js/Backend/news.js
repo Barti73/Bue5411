@@ -71,13 +71,16 @@ function FxSaveNewsJS()
 	//Obtenemos posicion
 	var btnModule = $('#btnModuleSelected').val();
 	var posicion = (btnModule) ? btnModule.substr(-1) : '';
+	//Convertir a B/N
+	var blackWhite = ( $('#chkGrayscale').prop('checked') ) ? 1: 0;
 
 	//Form Data
 	var formData = new FormData( $('#formUploadImage')[0] ); //Esto es equivalente a document.getElementById(formId)
 	formData.append("noticiaIdHashed", $('#hiddenNoticiaIdHashed').val());
 	formData.append("titulo", $('#txtTitulo').val());
-	formData.append("texto", $('#txtTexto').val());
+	formData.append("texto", tinyMCE.activeEditor.getContent());
 	formData.append("posicion", posicion);
+	formData.append("blackWhite", blackWhite);
 
 	//Ajax Call
 	var URL = $('#UrlAjaxSaveNews').val();
@@ -101,4 +104,28 @@ function FxPublishNewsJS()
 	
 	exeAjaxCallBackLoading(URL, strData, strDivResponse, FxSaveNewsPostJS);
 }
+
+function FxDeleteNews(noticiaIdHashed)
+{
+	swal({
+		title: "",
+		text: "¿Está seguro que desea eliminar el borrador?",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#ad1457",
+		confirmButtonText: "Eliminar",
+		cancelButtonText: "Cancelar",
+			closeOnConfirm: false
+		}, 
+		function(){
+			var jsonArray = { "noticiaIdHashed": noticiaIdHashed };
+			var URL = $('#UrlAjaxDeleteNews').val();
+			var strData = { value: jsonArray };
+			var strDivResponse = 'divResponse';
+			
+			exeAjaxCallBackLoading(URL, strData, strDivResponse, FxSaveNewsPostJS);
+		});	
+	
+}
+
 

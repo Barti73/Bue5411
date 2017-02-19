@@ -3,7 +3,7 @@
 				<div class="titleNews">{{ popupData.noticiaData.titulo }}</div>
 				<!--<div class="copeteTxt">lorem ipsum dolor sit amet consectetur adipiscing elit sed</div>-->
 				{% if popupData.noticiaData.imagen %}
-				<div><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}" style="filter: grayscale();" width="100%"></div>
+				<div><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}?rnd={{ popupData.noticiaData.rndNumber }}" style="" width="100%"></div>
 				{% endif %}
 				<div>
 					<ul class="share-buttons">
@@ -14,7 +14,7 @@
 				</div>	
 				<div class="divider"></div>
 				<div>
-					<p class="">{{ popupData.noticiaData.texto }}</p>
+					<p class="">{{ popupData.noticiaData.texto|raw }}</p>
 					<blockquote><b>{{ popupData.noticiaData.autor }}</b></blockquote>
 				</div>
 			</div>

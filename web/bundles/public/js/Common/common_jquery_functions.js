@@ -12,9 +12,16 @@ function FxSetPopupJS(result)
 		startingTop: '4%', // Starting top style attribute
 		endingTop: '10%', // Ending top style attribute
 		ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-			FxPopupModalReady();
+				FxPopupModalReady();
+				iframeInsideModal = $('#modalPopup iframe') //Capturamos iframes dentro del modal para poder destruirlos cuando se cierre el modal.
 			},
 		complete: function() {
+				//Destroy tinyMCE
+				tinymce.EditorManager.editors = [];
+				//Se destruye cualquier iframe contenido dentro del modal
+				$(iframeInsideModal).each(function(index, iframe){
+					$(iframe).attr('src', $(iframe).attr('src'));
+				});			
 			} // Callback for Modal close
 	});
     
@@ -32,6 +39,26 @@ function FxSetPopupJS(result)
 	$('.materialize-textarea').trigger('autoresize');
 	//Collapsibles
 	$('.collapsible').collapsible();
+	//Quill Editor
+	//var quill = new Quill('#quillContainer', {
+	//	theme: 'snow'
+	//});
+	//tinymce.init({ selector:'#mceContainer' });
+
+	tinymce.EditorManager.editors = []; 
+	tinymce.init({
+	  selector: '#mceContainer',
+	  theme: 'modern',
+	  height: 300,
+	  menubar: false,
+	  plugins: [
+		'advlist autolink lists link image charmap print preview anchor',
+		'searchreplace visualblocks code fullscreen',
+		'insertdatetime media table contextmenu paste code'
+	  ],
+	  toolbar: 'undo redo | insert | styleselect | fontselect bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
+	  content_css: '//www.tinymce.com/css/codepen.min.css'
+	});
 }
 
 //Materialize Initialization

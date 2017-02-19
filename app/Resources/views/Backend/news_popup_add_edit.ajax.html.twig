@@ -20,10 +20,10 @@
 								</div>
 							</div>
 							{% endif %}
-							<div class="row">
-								<div class="input-field col s12">
-									<textarea id="txtTexto" class="materialize-textarea" data-length="">{{ popupData.noticiaData.texto }}</textarea>
-									<label for="txtTexto" class="{{ popupData.class }}">Texto (*)</label>
+							<div class="row" style="">
+								<div id="" class="input-field col s12" style="margin-top: -20px;">
+									<p class="grey-text lighten-2">Texto (*)</p>									
+									<textarea id="mceContainer">{{ popupData.noticiaData.texto }}</textarea>
 								</div>
 							</div>
 						</form>
@@ -64,7 +64,7 @@
 							<ul class="collapsible" data-collapsible="accordion">
 								<li>
 									<div class="collapsible-header"><i class="material-icons blue-text">image</i>Ver imagen actual</div>
-									<div class="collapsible-body"><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}" style="filter: grayscale();" width="40%"></div>
+									<div class="collapsible-body"><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}?rnd={{ popupData.noticiaData.rndNumber }}" style="" width="40%"></div>
 								</li>
 							</ul>
 						</div>
@@ -77,7 +77,6 @@
 							<h5>Subir Fotografía</h5>						
 							<div class="divider"></div>	
 							<p class="grey-text lighten-2">* Sólo visibles para M1, M2 y M3</p>									
-							<div class="section"></div>
 							<form id="formUploadImage" method="post" action="" enctype="multipart/form-data" >
 								<div class="file-field input-field">
 									<div class="btn blue darken-3">
@@ -87,6 +86,10 @@
 									<div class="file-path-wrapper">
 										<input class="file-path validate" type="text" placeholder="Subir Fotografía">
 									</div>
+								</div>
+								<div>
+									<input type="checkbox" class="filled-in blueCheckbox" id="chkGrayscale" />
+									<label for="chkGrayscale" class="">Convertir a Blanco y Negro</label>
 								</div>
 							</form>
 						</div>

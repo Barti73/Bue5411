@@ -98,12 +98,14 @@ class News extends Controller
         $titulo = $request->request->get('titulo');
         $texto = $request->request->get('texto');
         $posicion = $request->request->get('posicion');
+        $blackWhite = $request->request->get('blackWhite');
         $fileObject = $request->files->get('fileImage');
         
         $arrayData = array('noticiaIdHashed' => $noticiaIdHashed,
                            'titulo' => $titulo,
                            'texto' => $texto,
-                           'posicion' => $posicion);
+                           'posicion' => $posicion,
+                           'blackWhite' => $blackWhite);
         
         $response = $this->bl->saveNews($arrayData, $fileObject);
         return new Response(var_dump($response));
@@ -119,6 +121,19 @@ class News extends Controller
         
         $arrayData = $request->request->get('value');
         $response = $this->bl->publishNews($arrayData);
+        return new Response(var_dump($response));
+    }
+    
+    /**
+     * @Route("/Backend/News/ajaxDeleteNews")
+     */
+    public function ajaxDeleteNews(Request $request)
+    {
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
+        
+        $arrayData = $request->request->get('value');
+        $response = $this->bl->deleteNews($arrayData);
         return new Response(var_dump($response));
     }
     

@@ -43,6 +43,7 @@ class NewsBL extends Controller
                               'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
                               'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
                               'UrlAjaxPublishNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_PUBLISH_NEWS,
+                              'UrlAjaxDeleteNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_DELETE_NEWS,
                               'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
                               'UrlLogin' => $this->getUrlLogin());
         return $arrayUrlAjax;
@@ -127,14 +128,22 @@ class NewsBL extends Controller
         //array('noticiaIdHashed' => $noticiaIdHashed,
         //      'titulo' => $titulo,
         //      'texto' => $texto,
-        //      'posicion' => $posicion);
+        //      'posicion' => $posicion,
+        //      'blackWhite' => $blackWhite);
         
-        //Agregamos el usuario
+        //Obtenemos el usuario
         $arrayData["usuarioId"] = $this->get('session')->get('userId');
 
-        //Insert noticia
+        //Insert/update noticia
         $noticiaBL = new NoticiaBL($this->container);
-        $noticiaId = $noticiaBL->insertNoticia($arrayData);
+        if (!$arrayData["noticiaIdHashed"])
+        {
+            $noticiaId = $noticiaBL->insertNoticia($arrayData);
+        }
+        else
+        {
+            $noticiaId = $noticiaBL->updateNoticia($arrayData);
+        }
         
         //Agregamos imagen si existe
         if ($fileObject)
@@ -144,6 +153,8 @@ class NewsBL extends Controller
             //nombre archivo
             $fileNameOrig = "noticia_".$noticiaBL->getNoticiaIdHashed($noticiaId)."_original.jpg";
             $fileNameResize = "noticia_".$noticiaBL->getNoticiaIdHashed($noticiaId)."_1600x900.jpg";
+            //Convertir a B/N
+            $blackWhite = ($arrayData["blackWhite"]) ? true : false;
             
             $fileObject->move($imageFolder, $fileNameOrig);
             
@@ -163,7 +174,7 @@ class NewsBL extends Controller
                                            false,
                                            false,
                                            90,
-                                           false);
+                                           $blackWhite);
             
             //Actualizamos noticia[imagen]
             $arrayImagen = array('noticiaId' => $noticiaId,
@@ -178,8 +189,24 @@ class NewsBL extends Controller
     {
         $noticiaBL = new NoticiaBL($this->container);
         $noticiaIdHashed = $arrayData["noticiaIdHashed"];
-        $noticiaId = $noticiaBL->getNoticiaIdFromHashed($noticiaIdHashed);
-        $response = $noticiaBL->publishNoticia($noticiaId);
+        $response = $noticiaBL->publishNoticia($noticiaIdHashed);
         return $response;        
     }
+    
+    public function deleteNews($arrayData)
+    {
+        $noticiaBL = new NoticiaBL($this->container);
+        $noticiaIdHashed = $arrayData["noticiaIdHashed"];
+        //Delete noticia
+        $response = $noticiaBL->deleteNoticia($noticiaIdHashed);
+        //Delete Imagen
+        //Carpeta
+        $imageFolder = $this->container->get('kernel')->getRootDir().Codigo5411Constants::IMAGES_FOLDER;
+        $fileNameResize = "noticia_".$noticiaIdHashed."_1600x900.jpg";
+        $filename = $imageFolder.$fileNameResize;
+        $fs = new Filesystem();
+        if ( $fs->exists($filename) ) { $fs->remove($filename); }
+        return $response;        
+    }
+    
 }

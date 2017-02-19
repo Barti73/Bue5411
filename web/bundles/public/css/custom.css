@@ -282,3 +282,7 @@ a, a:hover {
     border-radius: 0 0 2px 2px;
 }
 
+.blueCheckbox[type="checkbox"].filled-in:checked + label:after{
+	border: 2px solid #1565C0;
+    background-color: #1565C0;
+}
