@@ -91,3 +91,14 @@ function FxSaveNewsPostJS()
 	FxGetGridPage( $('#pageActual').val() );
 	FxShowMessageSuccess();
 }
+
+function FxPublishNewsJS()
+{
+	var jsonArray = { "noticiaIdHashed": $('#hiddenNoticiaIdHashed').val() };
+	var URL = $('#UrlAjaxPublishNews').val();
+	var strData = { value: jsonArray };
+	var strDivResponse = 'divResponse';
+	
+	exeAjaxCallBackLoading(URL, strData, strDivResponse, FxSaveNewsPostJS);
+}
+

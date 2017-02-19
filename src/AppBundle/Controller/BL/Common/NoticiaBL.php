@@ -137,6 +137,32 @@ class NoticiaBL
         return $noticia->getId();
     }
     
+    public function publishNoticia($noticiaId)
+    {
+        $noticia = $this->em->getRepository('AppBundle:Noticia')->find($noticiaId);
+        $posicion = $noticia->getPosicion();
+
+        //Si la noticia a publicar tiene una posicion en el portal...entonces la actual...se deja como no publicada
+        if ($posicion)
+        {
+            $noticiaActual = $this->em->getRepository('AppBundle:Noticia')->createQueryBuilder('n')
+                                ->where('n.id <> :noticiaId')
+                                ->andWhere('n.posicion = :posicion')
+                                ->andWhere('n.estado = 1') //Publicada
+                                ->setParameter('noticiaId', $noticiaId)
+                                ->setParameter('posicion', $posicion)
+                                ->getQuery()
+                                ->setMaxResults(1)
+                                ->getOneOrNullResult();
+            if ($noticiaActual) { $noticiaActual->setEstado(2); /*No Publicado*/ }
+        }
+        
+        //Establecemos la noticia a "Publicada"
+        $noticia->setEstado(1); //Publicado
+        $this->em->flush();
+        return 'OK';
+    }
+    
     public function insertNoticiaLog($arrayData)
     {
         //Entity

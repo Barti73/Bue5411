@@ -42,6 +42,7 @@ class NewsBL extends Controller
                               'UrlAjaxPopupNewsView' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_VIEW,
                               'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
                               'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
+                              'UrlAjaxPublishNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_PUBLISH_NEWS,
                               'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
                               'UrlLogin' => $this->getUrlLogin());
         return $arrayUrlAjax;
@@ -171,5 +172,14 @@ class NewsBL extends Controller
         }
         
         return $noticiaId;
+    }
+    
+    public function publishNews($arrayData)
+    {
+        $noticiaBL = new NoticiaBL($this->container);
+        $noticiaIdHashed = $arrayData["noticiaIdHashed"];
+        $noticiaId = $noticiaBL->getNoticiaIdFromHashed($noticiaIdHashed);
+        $response = $noticiaBL->publishNoticia($noticiaId);
+        return $response;        
     }
 }

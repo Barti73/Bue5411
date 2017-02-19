@@ -18,5 +18,14 @@
 					<blockquote><b>{{ popupData.noticiaData.autor }}</b></blockquote>
 				</div>
 			</div>
+			<!-- Si esta en "No Publicado o Borrador" -->
+			{% if popupData.noticiaData.estado != 1 %} 
+			<div class="modal-footer">
+				<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-green btn-flat ble">Cancelar</a>
+				<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="javascript:FxPublishNewsJS();">Publicar</a>
+			</div>
+			<input id="hiddenNoticiaIdHashed" name="hiddenNoticiaIdHashed" type="hidden" value="{{ popupData.noticiaData.hashedId }}">
+			{% endif %}
 		</div>
+		
 

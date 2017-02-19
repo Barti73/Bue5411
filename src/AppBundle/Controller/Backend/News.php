@@ -50,7 +50,7 @@ class News extends Controller
         if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
         $arrayData = $request->request->get('value');
-        
+        //Data noticia
         $popupData = $this->bl->getNoticia($arrayData);
                 
         return $this->render('Common/news_popup_view.ajax.html.twig', array('popupData' => $popupData));
@@ -106,6 +106,19 @@ class News extends Controller
                            'posicion' => $posicion);
         
         $response = $this->bl->saveNews($arrayData, $fileObject);
+        return new Response(var_dump($response));
+    }
+    
+    /**
+     * @Route("/Backend/News/ajaxPublishNews")
+     */
+    public function ajaxPublishNews(Request $request)
+    {
+        $validSession = $this->mainConstructor();
+        if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
+        
+        $arrayData = $request->request->get('value');
+        $response = $this->bl->publishNews($arrayData);
         return new Response(var_dump($response));
     }
     
