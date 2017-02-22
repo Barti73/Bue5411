@@ -89,6 +89,15 @@ ul.share-buttons .sr-only {
 	font-weight:bold;
 }
 
+.titleNews2{
+	font-size: 1.8rem;
+    line-height: 110%;
+    margin: 0 0 1.168rem 0;
+	color: rgba(0, 0, 0, 0.87);
+	font-weight:bold;
+}
+
+
 
 blockquote {
 	border-left: 5px solid #1565c0 !important ;
@@ -262,9 +271,8 @@ a, a:hover {
 }
 
 .OtrasNoticias{
-	width:75% !important;
+	width:100% !important;
 	font-weight:300;
-	font-size:1.5em;
 }
 
 .OtrasNoticiasContent{
@@ -285,4 +293,8 @@ a, a:hover {
 .blueCheckbox[type="checkbox"].filled-in:checked + label:after{
 	border: 2px solid #1565C0;
     background-color: #1565C0;
+}
+
+.News2{
+	padding:20px;
 }
