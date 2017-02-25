@@ -5,12 +5,14 @@ namespace AppBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BL\Backend\LoginBL;
+use AppBundle\Controller\BL\Common\CommonBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Login extends Controller
 {
     var $bl;
+    var $container;
     
     public function __construct()
     {
@@ -41,7 +43,8 @@ class Login extends Controller
     {
         $this->mainConstructor();
         
-        $arrayUrlAjax = $this->bl->getUrlAjax();
+        $commonBL = new CommonBL($this->container);
+        $arrayUrlAjax = $commonBL->getUrlAjax();
         
         return $this->render('Backend/login.html.twig', array('arrayUrlAjax' => $arrayUrlAjax));
     }
@@ -73,7 +76,5 @@ class Login extends Controller
         }
         return new response($response);
     }
-    
-    
     
 }

@@ -44,7 +44,7 @@
 								</div>
 								<div class="row">  
 									<div class="col s12 center">									
-										<a href="javascript: void(0);" class="waves-effect waves-light btn black" onclick="javascript: FxLogin();">Aceptar</a>
+										<a href="javascript: void(0);" class="waves-effect waves-light btn black" onclick="javascript:FxLogin();">Aceptar</a>
 									</div>	
 								</div>	
 							</div>
@@ -60,5 +60,19 @@
 	</main>
   
 </body>
+
+<script>
+$(document).ready(function()
+{
+	$(document).bind('keydown', function(event)
+	{
+		if(event.which == '13')
+		{
+			FxLogin();
+		}
+	});
+});
+</script>
+
 
 {% endblock %}

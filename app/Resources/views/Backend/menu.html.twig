@@ -1,0 +1,28 @@
+		<!-- Dropdown Structure -->
+		<ul id='dropdownDesktop' class='dropdown-content' style="margin-top: 64px;">
+			<li><a href="javascript:void(0);" onclick="javascript:FxOpenModalEditUserPassJS();">Editar</a></li>
+			<li class="divider"></li>
+			<li><a href="{{ arrayUrlAjax.UrlLogin }}">Salir</a></li>
+		</ul>
+		  
+		<!-- Dropdown Structure -->
+		<ul id='dropdownMobile' class='dropdown-content' style="margin-top: 40px;">
+			<li><a href="javascript:void(0);" onclick="javascript:FxOpenModalEditUserPassJS();">Editar</a></li>
+			<li class="divider"></li>
+			<li><a href="{{ arrayUrlAjax.UrlLogin }}">Salir</a></li>
+		</ul>			  
+  
+		<nav class="nav-extended pink darken-3">
+			<div class="nav-wrapper headerMarginCustom">
+				<a href="{{ arrayUrlAjax.UrlHome }}" class="brand-logo"><img src="{{ asset('bundles/public/images/logo.png') }}"></a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="{{ arrayUrlAjax.UrlHome }}">Noticias</a></li>
+					<li><a class="dropdown-button" href="#!" data-activates="dropdownDesktop">UserName<i class="material-icons right">person_pin</i></a></li>
+				</ul>
+				<ul id="mobile-demo" class="side-nav">
+					<li><a href="{{ arrayUrlAjax.UrlHome }}">Noticias</a></li>
+					<li><a class="dropdown-button" href="#" data-activates="dropdownMobile">Usuario<i class="material-icons right">person_pin</i></a></li>
+				</ul>
+			</div>
+		</nav>

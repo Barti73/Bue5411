@@ -31,24 +31,6 @@ class NewsBL extends Controller
         $this->fx = new PHPFunctions();
     }
 
-    public function getUrlLogin()
-    {
-        return Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_LOGIN;
-    }
-    
-    public function getUrlAjax()
-    {
-        $arrayUrlAjax = array('UrlAjaxPopupNewsAddEdit' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_ADD_EDIT,
-                              'UrlAjaxPopupNewsView' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_VIEW,
-                              'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
-                              'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
-                              'UrlAjaxPublishNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_PUBLISH_NEWS,
-                              'UrlAjaxDeleteNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_DELETE_NEWS,
-                              'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
-                              'UrlLogin' => $this->getUrlLogin());
-        return $arrayUrlAjax;
-    }
-    
     public function getFullNews()
     {
         $noticias =  $this->em->getRepository('AppBundle:Noticia')->findAll();

@@ -1,103 +1,64 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_backend.html.twig' %}
 
 {% block body %}
 
 <!-- JS -->
 <script src="{{ asset('bundles/public/js/Backend/news.js') }}" type="text/javascript"></script>
 
-<!-- Quill Text Editor CSS -->
-<!--<link href="{{ asset('bundles/public/lib/quill/quill.snow.css') }}" rel="stylesheet">-->
 <!-- TinyMCE Editor -->
-<script src="{{ asset('bundles/public/lib/tinymce/tinymce.min.js') }}" type="text/javascript"></script>-->
+<script src="{{ asset('bundles/public/lib/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
 
-
-<body>
-
-	<main>
-		<!-- Dropdown Structure -->
-		<ul id='dropdownUser' class='dropdown-content' style="margin-top: 64px;">
-			<li><a href="#!">Editar</a></li>
-			<li class="divider"></li>
-			<li><a href="{{ arrayUrlAjax.UrlLogin }}">Salir</a></li>
-		</ul>
-		  
-		<!-- Dropdown Structure -->
-		<ul id='dropdownMobile' class='dropdown-content' style="margin-top: 40px;">
-			<li><a href="#!">Editar</a></li>
-			<li class="divider"></li>
-			<li><a href="{{ arrayUrlAjax.UrlLogin }}">Salir</a></li>
-		</ul>			  
-  
-		<nav class="nav-extended pink darken-3">
-			<div class="nav-wrapper headerMarginCustom">
-				<a href="{{ arrayUrlAjax.UrlHome }}" class="brand-logo"><img src="{{ asset('bundles/public/images/logo.png') }}"></a>
-				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="{{ arrayUrlAjax.UrlHome }}">Noticias</a></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdownUser">UserName<i class="material-icons right">person_pin</i></a></li>
-				</ul>
-				<ul id="mobile-demo" class="side-nav">
-					<li><a href="{{ arrayUrlAjax.UrlHome }}">Noticias</a></li>
-					<li><a class="dropdown-button" href="#" data-activates="dropdownMobile">Usuario<i class="material-icons right">person_pin</i></a></li>
-				</ul>
+<main>
+	<div class="row">
+		<div class="col s12">
+			<div class="section">
+				<h5><b>Gestor de Noticias</b></h5>
 			</div>
-		</nav>
-		  
-		<div class="row">
-			<div class="col s12">
-				<div class="section">
-					<h5><b>Gestor de Noticias</b></h5>
-				</div>
-				
-				<table class="responsive-table highlight bordered ">
-					<thead>
-						<tr>
-							<th class="center">Fecha</th>
-							<th>Título</th>
-							<th>Texto</th>
-							<th>Autor</th>
-							<th class="center">Posición</th>
-							<th class="center">Estado</th>
-							<th class="center">Visualizar</th>  
-							<th class="center">Editar</th>  
-							<th class="center">Eliminar</th>	
-						</tr>
-					</thead>
-					<tbody id="divAjaxGridNews">
-					</tbody>
-				</table>
-			</div>
+			
+			<table class="responsive-table highlight bordered ">
+				<thead>
+					<tr>
+						<th class="center">Fecha</th>
+						<th>Título</th>
+						<th>Texto</th>
+						<th>Autor</th>
+						<th class="center">Posición</th>
+						<th class="center">Estado</th>
+						<th class="center">Visualizar</th>  
+						<th class="center">Editar</th>  
+						<th class="center">Eliminar</th>	
+					</tr>
+				</thead>
+				<tbody id="divAjaxGridNews">
+				</tbody>
+			</table>
 		</div>
-		
-		<!-- Paginator -->
-		<div id="divPaginator" class="center"></div>
-		
-		<!-- Add Button -->
-		<div class="row">
-			<div class="col s12">
-				<a class="btn-floating btn-large waves-effect waves-light red right" href="javascript:void(0);" onclick="javascript:FxOpenModalNewsAddEditJS(0);"><i class="material-icons">add</i></a>	  
-			</div>	
-		</div>
-		
-		<div id="divResponseAjaxPopupModal"></div>
-		<div id="divLoading"></div>
-		<div id="divResponse" style="display: none;"></div>
-		<input id="pageCount" name="pageCount" type="hidden" value="{{ pageCount }}">
-		<input id="pageActual" name="pageActual" type="hidden" value="">
-		<input id="UrlAjaxPopupNewsAddEdit" name="UrlAjaxPopupNewsAddEdit" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupNewsAddEdit }}">
-		<input id="UrlAjaxPopupNewsView" name="UrlAjaxPopupNewsView" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupNewsView }}">
-		<input id="UrlAjaxGetGridPage" name="UrlAjaxGetGridPage" type="hidden" value="{{ arrayUrlAjax.UrlAjaxGetGridPage }}">
-		<input id="UrlAjaxSaveNews" name="UrlAjaxSaveNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxSaveNews }}">
-		<input id="UrlAjaxPublishNews" name="UrlAjaxPublishNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPublishNews }}">
-		<input id="UrlAjaxDeleteNews" name="UrlAjaxDeleteNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxDeleteNews }}">
-	</main>
+	</div>
 	
-</body>
-
+	<!-- Paginator -->
+	<div id="divPaginator" class="center"></div>
+	
+	<!-- Add Button -->
+	<div class="row">
+		<div class="col s12">
+			<a class="btn-floating btn-large waves-effect waves-light red right" href="javascript:void(0);" onclick="javascript:FxOpenModalNewsAddEditJS(0);"><i class="material-icons">add</i></a>	  
+		</div>	
+	</div>
+	
+	<input id="pageCount" name="pageCount" type="hidden" value="{{ pageCount }}">
+	<input id="pageActual" name="pageActual" type="hidden" value="">
+	<input id="UrlAjaxPopupNewsAddEdit" name="UrlAjaxPopupNewsAddEdit" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupNewsAddEdit }}">
+	<input id="UrlAjaxPopupNewsView" name="UrlAjaxPopupNewsView" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupNewsView }}">
+	<input id="UrlAjaxGetGridPage" name="UrlAjaxGetGridPage" type="hidden" value="{{ arrayUrlAjax.UrlAjaxGetGridPage }}">
+	<input id="UrlAjaxSaveNews" name="UrlAjaxSaveNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxSaveNews }}">
+	<input id="UrlAjaxPublishNews" name="UrlAjaxPublishNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPublishNews }}">
+	<input id="UrlAjaxDeleteNews" name="UrlAjaxDeleteNews" type="hidden" value="{{ arrayUrlAjax.UrlAjaxDeleteNews }}">
+</main>
+	
 	
 <script>
 $(document).ready(function(){
-	//FxGetGridNews();
+
 });       
 </script>
 	

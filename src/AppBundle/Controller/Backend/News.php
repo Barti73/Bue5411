@@ -5,12 +5,14 @@ namespace AppBundle\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Controller\BL\Backend\NewsBL;
+use AppBundle\Controller\BL\Common\CommonBL;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class News extends Controller
 {
     var $bl;
+    var $container;
     
     public function __construct()
     {
@@ -33,7 +35,8 @@ class News extends Controller
         if (!$validSession) { return $this->redirect($this->bl->getUrlLogin()); }
         
         //URLs
-        $arrayUrlAjax = $this->bl->getUrlAjax();
+        $commonBL = new CommonBL($this->container);
+        $arrayUrlAjax = $commonBL->getUrlAjax();
         //Count
         $pageCount = $this->bl->getCountNews();
         

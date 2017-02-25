@@ -18,6 +18,8 @@ class Codigo5411Constants
     
     //Menu
     const MENU_NEWS = '/Backend/News';
+    const MENU_POPUP_EDIT_PASS_OPEN = '/Backend/User/ajaxPopupEditPassOpen';
+    const MENU_POPUP_EDIT_PASS_SAVE = '/Backend/User/ajaxPopupEditPassSave';
     
     //JS CONST (Ajax)
     //Login

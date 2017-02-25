@@ -1,0 +1,108 @@
+		<div id="modalPopup" class="modal">
+			<div class="modal-content">
+				<h5><b>{{ popupData.titulo }}</b></h5>
+				<div class="divider"></div>
+				<div class="section">
+				
+					<div class="row">
+						<form class="col s12">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="txtTitulo" type="text" data-length="100" value="{{ popupData.noticiaData.titulo }}">
+									<label for="txtTitulo" class="{{ popupData.class }}">Título (*)</label>
+								</div>
+							</div>
+							{% if popupData.operacion == 'update' %}
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="txtFecha" type="text" data-length="100" value="{{ popupData.noticiaData.fecha }}" readonly>
+									<label for="txtFecha" class="{{ popupData.class }}">Fecha</label>
+								</div>
+							</div>
+							{% endif %}
+							<div class="row" style="">
+								<div id="" class="input-field col s12" style="margin-top: -20px;">
+									<p class="grey-text lighten-2">Texto (*)</p>									
+									<textarea id="mceContainer">{{ popupData.noticiaData.texto }}</textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				
+					<div class="row">
+						<div class="col s12">	
+							<h5>Elegir módulo de publicación</h5>
+							<div class="divider"></div>
+							<div class="section">
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<a id="btnModule1" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule1" onclick="javascript:FxSelectNoticiaModulo(this);">M1</a>
+										<a id="btnModule2" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule2 right" onclick="javascript:FxSelectNoticiaModulo(this);">M2</a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s12">
+										<a id="btnModule3" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule3" onclick="javascript:FxSelectNoticiaModulo(this);">M3</a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col s12">
+										<a id="btnModule4" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule4" onclick="javascript:FxSelectNoticiaModulo(this);">M4</a>
+										<a id="btnModule5" href="javasctipt:void(0);" class="btnModule waves-effect waves-light btn-large blue darken-3 BtnModule5 right" onclick="javascript:FxSelectNoticiaModulo(this);">M5</a>
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					{% if popupData.operacion == 'update' and popupData.noticiaData.imagen %}
+					<div class="divider"></div>
+					<div class="row"></div>
+					<div class="row">
+						<div class="col s12" style="">
+							<ul class="collapsible" data-collapsible="accordion">
+								<li>
+									<div class="collapsible-header"><i class="material-icons blue-text">image</i>Ver imagen actual</div>
+									<div class="collapsible-body"><img src="{{ asset('bundles/public/upload/news/') }}{{ popupData.noticiaData.imagen }}?rnd={{ popupData.noticiaData.rndNumber }}" style="" width="40%"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					{% endif %}
+					
+					
+					<div class="row">
+						<div class="col s12">	
+							<h5>Subir Fotografía</h5>						
+							<div class="divider"></div>	
+							<p class="grey-text lighten-2">* Sólo visibles para M1, M2 y M3</p>									
+							<form id="formUploadImage" method="post" action="" enctype="multipart/form-data" >
+								<div class="file-field input-field">
+									<div class="btn blue darken-3">
+										<span>Subir</span>
+										<input id="fileImage" name="fileImage" type="file">
+									</div>
+									<div class="file-path-wrapper">
+										<input class="file-path validate" type="text" placeholder="Subir Fotografía">
+									</div>
+								</div>
+								<div>
+									<input type="checkbox" class="filled-in blueCheckbox" id="chkGrayscale" />
+									<label for="chkGrayscale" class="">Convertir a Blanco y Negro</label>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+				
+				<div class="modal-footer">
+					<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-green btn-flat ble">Cancelar</a>
+					<a href="javascript:void(0);" class=" modal-action modal-close waves-effect waves-green btn-flat" onclick="javascript:FxSaveNewsJS();">Guardar</a>
+				</div>								
+			</div>
+		</div>
+		<input id="hiddenNoticiaIdHashed" name="hiddenNoticiaIdHashed" type="hidden" value="{{ popupData.noticiaData.hashedId }}">
+		<input id="btnModuleSelected" name="btnModuleSelected" type="hidden" value="btnModule{{ popupData.noticiaData.posicion }}">		
+

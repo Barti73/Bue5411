@@ -23,14 +23,6 @@ class LoginBL extends Controller
         $this->fx = new PHPFunctions();
     }
 
-    public function getUrlAjax()
-    {
-        $arrayUrlAjax = array('UrlLogin' => Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_LOGIN,
-                              'UrlNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
-                              'UrlAjaxLoginCheck' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_LOGIN_CHECK);
-        return $arrayUrlAjax;
-    }
-    
     public function validateUser($arrayData)
     {
         $arrayUser = array();

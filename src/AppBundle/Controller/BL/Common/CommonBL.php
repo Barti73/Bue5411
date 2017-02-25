@@ -37,9 +37,26 @@ class CommonBL
         return $pageCount;
     }
     
-    public function getParametro($nombre)
+    public function getUrlLogin()
     {
-        return $this->em->getRepository('AppBundle:ParametrosConfiguracion')->findOneByNombre($nombre)->getValor();
+        return Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_LOGIN;
+    }
+    
+    public function getUrlAjax()
+    {
+        $arrayUrlAjax = array('UrlAjaxPopupNewsAddEdit' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_ADD_EDIT,
+                              'UrlAjaxPopupNewsView' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_VIEW,
+                              'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
+                              'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
+                              'UrlAjaxPublishNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_PUBLISH_NEWS,
+                              'UrlAjaxDeleteNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_DELETE_NEWS,
+                              'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+                              'UrlAjaxPopupEditPassOpen' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_POPUP_EDIT_PASS_OPEN,
+                              'UrlAjaxPopupEditPassSave' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_POPUP_EDIT_PASS_SAVE,
+                              'UrlNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+                              'UrlAjaxLoginCheck' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_LOGIN_CHECK,
+                              'UrlLogin' => $this->getUrlLogin());
+        return $arrayUrlAjax;
     }
     
 }
