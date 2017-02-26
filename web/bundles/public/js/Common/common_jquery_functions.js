@@ -12,6 +12,39 @@ function FxSetPopupJS(result)
 		startingTop: '4%', // Starting top style attribute
 		endingTop: '10%', // Ending top style attribute
 		ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+			},
+		complete: function() {
+			} // Callback for Modal close
+	});
+    
+	$('#modalPopup').modal('open');
+	
+	//Convertir Combos
+	$('.selectForm').material_select();
+	//ToolTip
+	$('.tooltipped').tooltip({delay: 50});
+	//DatePickers
+	FxSetDatepicker();	
+	//Tabs
+	$('ul.tabs').tabs();
+	//TextArea
+	$('.materialize-textarea').trigger('autoresize');
+	//Collapsibles
+	$('.collapsible').collapsible();
+}
+
+function FxSetNewsPopupJS(result)
+{
+    $('#divResponseAjaxPopupModal').html(result);
+
+	$('#modalPopup').modal({
+		dismissible: true, // Modal can be dismissed by clicking outside of the modal
+		opacity: .5, // Opacity of modal background
+		inDuration: 300, // Transition in duration
+		outDuration: 200, // Transition out duration
+		startingTop: '4%', // Starting top style attribute
+		endingTop: '10%', // Ending top style attribute
+		ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 				FxPopupModalReady();
 				iframeInsideModal = $('#modalPopup iframe') //Capturamos iframes dentro del modal para poder destruirlos cuando se cierre el modal.
 			},
@@ -39,12 +72,7 @@ function FxSetPopupJS(result)
 	$('.materialize-textarea').trigger('autoresize');
 	//Collapsibles
 	$('.collapsible').collapsible();
-	//Quill Editor
-	//var quill = new Quill('#quillContainer', {
-	//	theme: 'snow'
-	//});
-	//tinymce.init({ selector:'#mceContainer' });
-
+	//TinyMCE
 	tinymce.EditorManager.editors = []; 
 	tinymce.init({
 	  selector: '#mceContainer',

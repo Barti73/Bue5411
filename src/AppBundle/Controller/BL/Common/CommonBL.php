@@ -44,19 +44,32 @@ class CommonBL
     
     public function getUrlAjax()
     {
-        $arrayUrlAjax = array('UrlAjaxPopupNewsAddEdit' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_ADD_EDIT,
+        $arrayUrlAjax = array('UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+                              'UrlNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+                              'UrlUsers' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_USERS,
+                              'UrlAjaxLoginCheck' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_LOGIN_CHECK,
+                              'UrlLogin' => $this->getUrlLogin(),
+                              'UrlAjaxPopupNewsAddEdit' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_ADD_EDIT,
                               'UrlAjaxPopupNewsView' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_NEWS_VIEW,
-                              'UrlAjaxGetGridPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_PAGE,
+                              'UrlAjaxGetGridNewsPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_NEWS_PAGE,
                               'UrlAjaxSaveNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_NEWS,
                               'UrlAjaxPublishNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_PUBLISH_NEWS,
                               'UrlAjaxDeleteNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_DELETE_NEWS,
-                              'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
                               'UrlAjaxPopupEditPassOpen' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_POPUP_EDIT_PASS_OPEN,
                               'UrlAjaxPopupEditPassSave' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_POPUP_EDIT_PASS_SAVE,
-                              'UrlNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
-                              'UrlAjaxLoginCheck' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_LOGIN_CHECK,
-                              'UrlLogin' => $this->getUrlLogin());
+                              'UrlAjaxPopupUserAddEdit' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_USER_ADD_EDIT,
+                              'UrlAjaxGetGridUserPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_USER_PAGE,
+                              'UrlAjaxSaveUser' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_SAVE_USER);
         return $arrayUrlAjax;
+    }
+    
+    public function getUserdata($session)
+    {
+        $arrayUser = array('userId' => $session->get('userId'),
+                           'userNombre' => $session->get('userNombre'),
+                           'userName' => $session->get('userName'),
+                           'userPerfil' => $session->get('userPerfil'));
+        return $arrayUser;
     }
     
 }

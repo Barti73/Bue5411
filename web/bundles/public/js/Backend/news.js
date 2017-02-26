@@ -17,7 +17,7 @@ function FxOpenModalNewsAddEditJS(noticiaIdHashed)
 	var strData = { value: jsonArray };
 	var strDivResponse = 'divResponseAjaxPopupModal';
 	
-	exeAjaxCallBackLoadingSetResult(URL, strData, strDivResponse, FxSetPopupJS);
+	exeAjaxCallBackLoadingSetResult(URL, strData, strDivResponse, FxSetNewsPopupJS);
 }
 
 function FxPopupModalReady()
@@ -34,7 +34,7 @@ function FxPopupModalReady()
 function FxGetGridPage(pageNumber)
 {
 	var jsonArray = { "pageNumber": pageNumber };
-	var URL = $('#UrlAjaxGetGridPage').val();
+	var URL = $('#UrlAjaxGetGridNewsPage').val();
 	var strData = { value: jsonArray };
 	var strDivResponse = 'divAjaxGridNews';
 	

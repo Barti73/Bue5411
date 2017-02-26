@@ -37,11 +37,14 @@ class News extends Controller
         //URLs
         $commonBL = new CommonBL($this->container);
         $arrayUrlAjax = $commonBL->getUrlAjax();
+        //User Data
+        $userData = $commonBL->getUserdata($this->get('session'));
         //Count
         $pageCount = $this->bl->getCountNews();
         
         return $this->render('Backend/news.html.twig', array('pageCount' => $pageCount,
-                                                             'arrayUrlAjax' => $arrayUrlAjax));
+                                                             'arrayUrlAjax' => $arrayUrlAjax,
+                                                             'userData' => $userData));
     }
 
     /**

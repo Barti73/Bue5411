@@ -4,8 +4,11 @@ namespace AppBundle\Controller\BL\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\Usuario;
 use AppBundle\Functions\PHPFunctions;
 use AppBundle\Controller\BL\Backend\LoginBL;
+use AppBundle\Controller\BL\Common\CommonBL;
+use AppBundle\Constants\Codigo5411Constants;
 
 class UserBL extends Controller
 {
@@ -39,60 +42,124 @@ class UserBL extends Controller
     {
         return $this->em->getRepository('AppBundle:Usuario')->find($userId);
     }
-    
-    public function getUsuarios($radioValue)
+
+    public function getFullUsers()
     {
-        $rep = $this->em->getRepository('AppBundle:Usuario');
-        $query = $rep->createQueryBuilder('u')
-            ->where('u.activo = :radio or :radio = \'-1\'')
-            ->orderBy('u.nombre', 'ASC')
-            ->setParameter('radio', $radioValue)
-            ->getQuery();
-        $res = $query->getResult();
-        //Procesamos para devolver array y customizar la respuesta
-        $usuarios = array();
-        foreach ($res as $usuario)
+        $users =  $this->em->getRepository('AppBundle:Usuario')->findAll();
+        return $users;
+    }
+    
+    public function getGridPage($arrayData)
+    {
+        $selectedPage = $arrayData["pageNumber"];
+        //BL's
+        $commonBL = new CommonBL($this->container);
+        
+        $recordsPerPage = $commonBL->getResultsPerPage();
+        $offset = ($selectedPage == 1) ? 0 : ($selectedPage - 1) * $recordsPerPage ;
+
+        $users = $this->em->getRepository('AppBundle:Usuario')->createQueryBuilder('u')
+                        ->orderBy('u.username', 'asc')
+                        ->setFirstResult($offset)
+                        ->setMaxResults($recordsPerPage)
+                        ->getQuery()
+                        ->getResult();
+        
+        $arrayResponse = array();
+        foreach ($users as $user)
         {
-            $tmp = $this->getUsuarioPreparedData($usuario);
-            $usuarios[] = $tmp;
+            $arrayResponse[] = $this->getUserData($user);
         }
-        return $usuarios;
+        
+        return $arrayResponse;
+    }
+    
+    public function getCountNews()
+    {
+        $commonBL = new CommonBL($this->container);
+        
+        $users = $this->getFullUsers();
+        $countUsers = $commonBL->getPaginatorPageCount(count($users));
+        return $countUsers;
     }
 
-    public function getUsuarioById($usuarioId)
+    public function getUsuario($arrayData)
     {
-        $usuario = $this->em->getRepository('AppBundle:Usuario')->find($usuarioId);
-        return $this->getUsuarioPreparedData($usuario);
+        $response = array();
+        
+        $userIdHashed = $arrayData["userIdHashed"];
+        
+        if (!$userIdHashed) //Nuevo Usuario
+        {
+            $userData = $this->getUserData(null);
+            $response = array('titulo' => 'Crear Nuevo Usuario',
+                              'class' => '',
+                              'userData' => $userData,
+                              'operacion' => 'insert');
+        }
+        else //Editar Usuario
+        {
+            $userId = $this->getUserIdFromHashed($userIdHashed);
+            $user = $this->getUserEntity($userId);
+            $userData = $this->getUserData($user);
+
+            $response = array('titulo' => 'Editar Usuario',
+                              'class' => 'active',
+                              'userData' => $userData,
+                              'operacion' => 'update');
+        }
+        return $response;
+    }
+
+    public function getUserData($user)
+    {
+        $response = array('id' => '',
+                          'hashedId' => '',
+                          'username' => '',
+                          'nombre' => '',
+                          'perfil' => '2',
+                          'perfilTexto' => 'Usuario',
+                          'estado' => '1',
+                          'estadoTexto' => 'Activo');
+
+        if ($user)
+        {
+            $perfilTexto = ($user->getPerfil() == 1) ? 'Administrador' : 'Usuario';
+            $estadoTexto = ($user->getActivo() == 1) ? 'Activo' : 'No Activo';
+            $response = array('id' => $user->getId(),
+                              'hashedId' => $this->getUserIdHashed($user->getId()),
+                              'username' => $user->getUsername(),
+                              'nombre' => $user->getNombre(),
+                              'perfil' => $user->getPerfil(),
+                              'perfilTexto' => $perfilTexto,
+                              'estado' => $user->getActivo(),
+                              'estadoTexto' => $estadoTexto);
+            
+        }
+        return $response;
     }
     
-    public function getUsuarioByNombre($nombre)
+    public function saveUser($arrayData)
     {
-        $usuario = $this->em->getRepository('AppBundle:Usuario')->findByNombre($nombre);
-        return $usuario;
-    }
-    
-    public function getUsuarioByUsername($username)
-    {
-        $usuario = $this->em->getRepository('AppBundle:Usuario')->findByUsername($username);
-        return $usuario;
-    }
-    
-    public function getUsuarioPreparedData($usuario)
-    {
-        if (!$usuario) { return false; }
-        $activo = ($usuario->getActivo() == 1) ? 'visible' : 'hidden';
-        $perfilUser = ($usuario->getPerfil() == 1) ? 'Administrador' : 'Usuario';
-        $dataUsuario = array('id' => $usuario->getId(),
-                             'nombre' => $usuario->getNombre(),
-                             'username' => $usuario->getUsername(),
-                             'password' => $usuario->getPassword(),
-                             'perfil' => $usuario->getPerfil(),
-                             'perfilNombre' => $perfilUser,
-                             'activo' => $usuario->getActivo(),
-                             'visibleGrid' => $activo,
-                             'hashedId' => $this->getUsuarioIdHashed($usuario->getId()),
-                             'extra' => 'block');
-        return $dataUsuario;
+        $userIdHashed = $arrayData["userIdHashed"];
+        $userUsername = $arrayData["userUsername"];
+        $userNombre = $arrayData["userNombre"];
+        $userPerfil = $arrayData["userPerfil"];
+        $userEstado = $arrayData["userEstado"];
+        
+        if (!$userIdHashed) //Insert
+        {
+            $userPassword = Codigo5411Constants::PASSWORD_NEW_USER;
+            $response = $this->insert($userNombre, $userUsername, $userPassword, $userPerfil, $userEstado);
+        }
+        else
+        {
+            $userId = $this->getUserIdFromHashed($userIdHashed);
+            $response = $this->update($userId, $userNombre, $userUsername, $userPerfil, $userEstado);
+        }
+        
+        return $response;
+        
     }
     
     public function setUserPassword($arrayData)
@@ -122,9 +189,8 @@ class UserBL extends Controller
     public function insert($nombre, $username, $password, $perfil, $activo)
     {
         //Validamos que no exista el rut o la huella
-        $existeNombre = $this->getUsuarioByNombre($nombre);
-        $existeUsername = $this->getUsuarioByUsername($username);
-        if ($existeNombre || $existeUsername) { return false; }
+        $existeUsername = $this->em->getRepository('AppBundle:Usuario')->findOneByUsername($username);
+        if ($existeUsername) { return 'El usuario ya existe.'; }
         
         $usuario = new Usuario();
         $usuario->setNombre($nombre);
@@ -135,19 +201,12 @@ class UserBL extends Controller
 
         $this->em->persist($usuario);
         $this->em->flush();
-        return $usuario->getId();
+        return 'ok';
     }
     
-    public function update($usuarioId, $nombre, $username, $password, $perfil, $activo)
+    public function update($usuarioId, $nombre, $username, $perfil, $activo)
     {
-        //Validamos que no exista el nombre o el username para otro usuario
-        $existeNombre = $this->em->getRepository('AppBundle:Usuario')->createQueryBuilder('u')
-                ->where('u.id <> :usuarioId')
-                ->andwhere('u.nombre = :nombre')
-                ->setParameter('usuarioId', $usuarioId)
-                ->setParameter('nombre', $nombre)
-                ->getQuery()
-                ->setMaxResults(1)->getOneOrNullResult();
+        //Validamos que no exista el username para otro usuario
         $existeUsername = $this->em->getRepository('AppBundle:Usuario')->createQueryBuilder('u')
                 ->where('u.id <> :usuarioId')
                 ->andwhere('u.username = :username')
@@ -155,19 +214,15 @@ class UserBL extends Controller
                 ->setParameter('username', $username)
                 ->getQuery()
                 ->setMaxResults(1)->getOneOrNullResult();
-        if ($existeNombre || $existeUsername) { return false; }
+        if ($existeUsername) { return 'El usuario ya existe.'; }
         
-        $usuario = $this->getUsuario($usuarioId);
+        $usuario = $this->getUserEntity($usuarioId);
         $usuario->setNombre($nombre);
         $usuario->setUsername($username);
-        if ($password)
-        {
-            $usuario->setPassword(md5($password));
-        }
         $usuario->setPerfil($perfil);
         $usuario->setActivo($activo);
         $this->em->flush();
-        return true;
+        return 'ok';
     }
             
 
