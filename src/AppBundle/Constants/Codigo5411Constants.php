@@ -4,12 +4,14 @@ namespace AppBundle\Constants;
 
 class Codigo5411Constants 
 {
-    const PAGINATOR_RESULTS_PER_PAGE = 3;
+    const PAGINATOR_RESULTS_PER_PAGE = 5;
+    const PAGINATOR_OTHER_NEWS_RESULTS_PER_PAGE = 2;
     
     const PASSWORD_NEW_USER = 'codigo5411';
     
     //URLs
     const URL_SITE = "http://localhost:8080/Bue5411/web/app_dev.php";
+    const URL_OTHER_NEWS = "/OtrasNoticias";
     const URL_LOGIN = "/Backend/Login";
     
     //Menu
@@ -17,7 +19,10 @@ class Codigo5411Constants
     const MENU_USERS = '/Backend/User';
     const MENU_POPUP_EDIT_PASS_OPEN = '/Backend/User/ajaxPopupEditPassOpen';
     const MENU_POPUP_EDIT_PASS_SAVE = '/Backend/User/ajaxPopupEditPassSave';
-    
+
+    /////////////
+    // BACKEND //
+    /////////////
     //JS CONST (Ajax)
     //Login
     const AJAX_LOGIN_CHECK = "/Backend/Login/ajaxLoginCheck";
@@ -32,7 +37,14 @@ class Codigo5411Constants
     const AJAX_POPUP_USER_ADD_EDIT = "/Backend/User/ajaxPopupUserAddEdit";
     const AJAX_GRID_USER_PAGE = "/Backend/User/ajaxGridUserPage";
     const AJAX_SAVE_USER = "/Backend/User/ajaxSaveUser";
-    
+
+    ////////////
+    // PORTAL //
+    ////////////
+    const AJAX_POPUP_PORTAL_NEWS_VIEW = "/Frontend/News/ajaxPopupPortalNewsView";
+    const AJAX_GRID_OTHER_NEWS_PAGE = "/Frontend/OtrasNoticias/ajaxGridOtherNewsPage";
+    const AJAX_OTHER_NEWS_PAGINATOR = "/Frontend/OtrasNoticias/ajaxGridPaginator";
+
     //Files
     const IMAGES_FOLDER = "/../web/bundles/public/upload/news/";
     

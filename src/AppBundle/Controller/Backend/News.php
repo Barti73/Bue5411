@@ -59,7 +59,8 @@ class News extends Controller
         //Data noticia
         $popupData = $this->bl->getNoticia($arrayData);
                 
-        return $this->render('Common/news_popup_view.ajax.html.twig', array('popupData' => $popupData));
+        return $this->render('Common/news_popup_view.ajax.html.twig', array('popupData' => $popupData,
+                                                                            'backend' => 1));
     }
     
     /**

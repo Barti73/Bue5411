@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<main>
+	<div class="container">	
+		<div class="section">
+			<h5><b>Buscar Noticias</b></h5>
+			<div class="divider"></div>
+		</div>
+		<div class="row">
+			<div class="col s12">	
+				<div class="input-field col s12">
+					<!--<a href="javascript:void(0);"><i class="material-icons prefix">search</i></a>-->
+					<i class="material-icons prefix pointerOnHover" onclick="javascript:FxAjaxSearchJS();">search</i>
+					<input id="txtSearch" type="text" class="validate">
+					<label for="txtSearch">Buscar</label>
+				</div>
+			</div>
+		</div>
+		<div class="section">
+			<h5 class="blue-text">Resultados</h5>
+			<div class="divider"></div>
+		</div>
+		<div id="divOtherNewsGrid"></div>
+		
+		<!-- Paginator -->
+		<div id="divPaginator" class="center"></div>
+
+	</div>
+	<div id="divResponse" style="display: none;"></div>
+	<input id="pageCount" name="pageCount" type="hidden" value="{{ pageCount }}">
+	<input id="pageActual" name="pageActual" type="hidden" value="">
+	<input id="UrlAjaxPopupPortalNewsView" name="UrlAjaxPopupPortalNewsView" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupPortalNewsView }}">	
+	<input id="UrlAjaxGetGridOtherNewsPage" name="UrlAjaxGetGridOtherNewsPage" type="hidden" value="{{ arrayUrlAjax.UrlAjaxGetGridOtherNewsPage }}">	
+	<input id="UrlAjaxGetGridOtherNewsPaginator" name="UrlAjaxGetGridOtherNewsPaginator" type="hidden" value="{{ arrayUrlAjax.UrlAjaxGetGridOtherNewsPaginator }}">	
+	
+</main>
+<script>
+$(document).ready(function()
+{
+	$('#txtSearch').bind('keydown', function(event)
+	{
+		if(event.which == '13')
+		{
+			FxAjaxSearchJS();
+		}
+	});
+});
+
+</script>		
+	
+{% endblock %}

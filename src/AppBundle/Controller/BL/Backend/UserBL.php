@@ -19,7 +19,7 @@ class UserBL extends Controller
     protected $em;
     protected $fx;
     
-    const SALT_USER = 'SALT_USER';
+    const SALT_USER = 'saltUser';
     
     public function __construct($container)
     {

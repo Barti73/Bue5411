@@ -2,286 +2,170 @@
 
 {% block body %}
 
-<body>
-  
-	<!-- Modal Structure -->
-	<div id="divModal" class="modal">
-		<div class="modal-content">
-			<div class="titleNews">Noticia Titular 1</div>
-			<div class="copeteTxt">lorem ipsum dolor sit amet consectetur adipiscing elit sed</div>
-			<div><img src="{{ asset('bundles/public/images/Congreso.jpg') }}" style="filter: grayscale();" width="100%"></div>
-			<div>
-				<ul class="share-buttons">
-					<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-					<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-					<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
-				</ul>
-			</div>	
-			<div class="divider"></div>
-			<div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <b>Nulla elementum non orci interdum cursus.</b> Donec et condimentum nisl, nec interdum velit. Integer in mauris in arcu suscipit pharetra. Etiam ac blandit sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum faucibus pulvinar est, at accumsan justo aliquam a. Nullam vulputate purus vel diam sodales hendrerit. Etiam tristique lobortis turpis, auctor efficitur erat dignissim ut. Donec vel mi dictum, ullamcorper risus non, pretium urna.</p>
-				<p>Cras in nisl faucibus, bibendum augue vitae, ornare sapien. Sed ultricies fermentum malesuada. Maecenas at ante quis lorem blandit auctor. Suspendisse potenti. Mauris placerat enim in lorem pretium, fringilla facilisis risus eleifend. Donec dui dolor, fermentum sit amet nulla id, eleifend dictum nisl. Donec diam est, faucibus vitae rhoncus quis, tincidunt et nulla. Aliquam non tristique ipsum, vel fermentum tortor. Nullam vitae aliquet ante. Pellentesque posuere auctor ligula, in volutpat nibh porta eu. Proin fermentum orci et eros vulputate, nec dictum nulla feugiat.</p>
-				<p>Donec mattis, massa vitae luctus aliquet, orci dolor commodo lectus, et eleifend nisi mi sed lorem. <b>Donec luctus odio id justo lacinia, vitae auctor quam mattis.</b> Nullam congue urna dui. Phasellus varius ligula velit, eu pharetra tellus condimentum auctor. Nam vulputate ultricies diam, a faucibus enim ultricies at. Nulla faucibus scelerisque urna, vel egestas erat rhoncus vitae. Nam malesuada risus nibh, a scelerisque velit lobortis eget. Nullam luctus lacinia ligula. In hac habitasse platea dictumst. Proin molestie sagittis diam, vitae hendrerit libero viverra non. Nunc sodales erat tortor, eu rutrum neque tempor eu.</p>
-				<blockquote><b>Adrián Lopez Palacios</b></blockquote>
+<main>
+
+	<div class="row" style="margin-top: 10px !important;">
+		<div class="col s12 l6">
+			<div class="card">
+				<!--<a href="javascript:void(0);" onclick="javascript:FxOpenModal();">-->
+				<!--!a href="#divModal">-->
+					<div class="card-content">
+						<div class="titleNews">{{ news[0].titulo }}</div>
+						<div id="divTextNoticia0" class="copeteTxt ellipsisText" style="max-height: 120px;">{{ news[0].texto|raw }}
+							<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news[0].hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+						</div>
+						{% if news[0].imagen %}
+						<div><img src="{{ asset('bundles/public/upload/news/') }}{{ news[0].imagen }}?rnd={{ news[0].rndNumber }}" style="" width="100%"></div>
+						{% endif %}
+						<div>
+							<ul class="share-buttons">
+								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
+								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
+								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+							</ul>
+						</div>
+					</div>
+				<!--</a>-->
 			</div>
 		</div>
+			
+		<div class="col s12 l2">				
+				<div class="News2">
+					<div class="titleNews">{{ news[1].titulo }}</div>
+					<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 300px;">{{ news[1].texto|raw }}
+						<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news[1].hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+					</div>
+					<!--<div><img src="{{ asset('bundles/public/images/posadas.jpg') }}" style="filter: grayscale();" width="100%"></div>-->		
+					<div>
+						<ul class="share-buttons">
+							<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
+							<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
+							<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="section">
+					<div class="divider"></div>
+				</div>
+			<a href="{{ arrayUrlAjax.UrlOtherNews}}" class="waves-effect waves-light btn-large pink darken-3 OtrasNoticias hide-on-med-and-down" style="margin-top:10%;">Otras <b>Noticias</b></a>
+		</div>	
+		<div class="col s12 l4">	
+			<div class="card">
+				<div class="card-content">
+					<div class="titleNews">{{ news[2].titulo }}</div>
+					<div id="divTextNoticia2" class="copeteTxt ellipsisText" style="max-height: 120px;">{{ news[2].texto|raw }}
+						<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news[2].hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+					</div>
+					{% if news[2].imagen %}
+					<div><img src="{{ asset('bundles/public/upload/news/') }}{{ news[2].imagen }}?rnd={{ news[2].rndNumber }}" style="" width="100%"></div>
+					{% endif %}
+					<div>
+						<ul class="share-buttons">
+							<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
+							<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
+							<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+				<a href="{{ arrayUrlAjax.UrlOtherNews}}" class="waves-effect waves-light btn-large pink darken-3 OtrasNoticias hide-on-large-only">Otras <b>Noticias</b></a>
+		</div>	
 	</div>
 	
-	<main>
-		<div class="navbar-fixed">
-			<nav class="pink darken-3">
-				<div class="nav-wrapper">
-					<a href="{{ linkHome }}" class="brand-logo center"><img src="{{ asset('bundles/public/images/logo.png') }}"></a>
-					<ul class="right">
-						<li><a href="#"><i class="material-icons">search</i></a></li>
-					</ul>
-				</div>
-			</nav>
+	<div class="row">	
+		<div class="col s12">
+			<div class="divider"></div>
+		</div>
+	</div>
+	<br>
+		
+	<div class="row">
+		<div class="col s12 l4 center">	
+			<div><img src="{{ asset('bundles/public/images/publi-1.jpg') }}" style="width: 320px; height: 250px;"></div>						
 		</div>
 		
-		<div class="row hide-on-med-and-down" style="margin-bottom: 0px !important;">
-			<div class="col l8">
-				<div class="row margingBottomNull grey lighten-5">
-					<div class="col l6 grey lighten-4 "> 
-						<div class="socialbtns center">
-							<ul>
-								<li><a href="#" class="fa fa-lg fa-facebook"></a></li>
-								<li><a href="#" class="fa fa-lg fa-twitter"></a></li>
-								<li><a href="#" class="fa fa-lg fa-youtube"></a></li>
-								<li><a href="#" class="fa fa-lg fa-envelope"></a></li>	
-								<li><a href="#" class="fa fa-lg fa-map"></a></li>										
+		<div class="col s12 l4 center">
+			<div><img src="{{ asset('bundles/public/images/publi-2.jpg') }}" style="width: 320px; height: 250px;"></div>							
+		</div>
+		
+		<div class="col s12 l4 center">
+			<div><img src="{{ asset('bundles/public/images/trivago.jpg') }}" style="width: 320px; height: 250px;"></div>							
+		</div>
+	</div>
+
+	<div class="row center">	
+	  <div class="parallax-container valign-wrapper" style="height:150px; margin: 40px 0 40px 0">
+		<div class="center col s12 center"><img src="{{ asset('bundles/public/images/logoColor.png') }}" class="responsive-img"></div>
+		<div class="parallax"><img src="{{ asset('bundles/public/images/buenos_aires.jpg') }}" style="filter: grayscale(); opacity: 0.5;"></div>
+	  </div>
+	</div>  
+	
+	<div class="container" style="margin-bottom:150px;">		
+		<div class="row">
+			<div class="col s12 l6">
+				<div class="row">
+					<div class="col s12 l6">
+						{% if news[3].imagen %}
+						<div><img src="{{ asset('bundles/public/upload/news/') }}{{ news[3].imagen }}?rnd={{ news[3].rndNumber }}" style="" width="100%"></div>
+						{% endif %}
+					</div>	
+					<div class="col s12 l6">
+						<div class="titleNews2">{{ news[3].titulo }}</div>
+						<div id="divTextNoticia3" class="copeteTxt ellipsisText" style="max-height: 120px;">{{ news[3].texto|raw }}
+							<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news[3].hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+						</div>	
+						<div>
+							<ul class="share-buttons">
+								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
+								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
+								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
 							</ul>
 						</div>						
 					</div>
-					<div class="center date col l6 dateDay"><b>Ciudad de Buenos Aires,</b> Sábado 28 Enero de 2017</div>
 				</div>
-			</div>
+				<div class="divider"></div>					
+				<br>
+			</div>	
 			
-			<div class="col l4">
-				<div class="center-align">
-					<div class="tiempo-widget">
-						<!-- www.TuTiempo.net - Ancho:182px - Alto:77px -->
-						<div id="TT_RujEEEEk1ddBCa9A7fqjzDzzDWlALEIlbdkdksiIq1D">Pronóstico de Tutiempo.net</div>
-						<script type="text/javascript" src="http://www.tutiempo.net/widget/eltiempo_RujEEEEk1ddBCa9A7fqjzDzzDWlALEIlbdkdksiIq1D"></script>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row hide-on-large-only" style="margin-bottom: 0px">
-			<div class="col s12 grey lighten-5" style="padding:20px;">
-				<div class="center dateDay"><b>Ciudad de Buenos Aires,</b> Sábado 28 Enero de 2017</div>
-			</div>
-		</div>
-
-		<div class="row" style="margin-top: 10px !important;">
 			<div class="col s12 l6">
-				<div class="card">
-					<!--<a href="javascript:void(0);" onclick="javascript:FxOpenModal();">-->
-					<!--!a href="#divModal">-->
-						<div class="card-content">
-							<div class="titleNews">Una sesión escandalosa</div>
-							<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 120px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum non orci interdum cursus. 
-								Donec et condimentum nisl, nec interdum velit. Integer in mauris in arcu suscipit pharetra. Etiam ac blandit sem. 
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum faucibus pulvinar est, at accumsan justo aliquam a. 
-								Nullam vulputate purus vel diam sodales hendrerit. Etiam tristique lobortis turpis, auctor efficitur erat dignissim ut. 
-								Donec vel mi dictum, ullamcorper risus non, pretium urna.
-								Cras in nisl faucibus, bibendum augue vitae, ornare sapien. Sed ultricies fermentum malesuada. Maecenas at ante quis lorem blandit auctor. Suspendisse potenti. 
-								Mauris placerat enim in lorem pretium, fringilla facilisis risus eleifend. Donec dui dolor, fermentum sit amet nulla id, eleifend dictum nisl. 
-								Donec diam est, faucibus vitae rhoncus quis, tincidunt et nulla. Aliquam non tristique ipsum, vel fermentum tortor. Nullam vitae aliquet ante. 
-								Pellentesque posuere auctor ligula, in volutpat nibh porta eu. Proin fermentum orci et eros vulputate, nec dictum nulla feugiat.
-								Donec mattis, massa vitae luctus aliquet, orci dolor commodo lectus, et eleifend nisi mi sed lorem. Donec luctus odio id justo lacinia, vitae auctor quam mattis. 
-								Nullam congue urna dui. Phasellus varius ligula velit, eu pharetra tellus condimentum auctor. Nam vulputate ultricies diam, a faucibus enim ultricies at. 
-								Nulla faucibus scelerisque urna, vel egestas erat rhoncus vitae. Nam malesuada risus nibh, a scelerisque velit lobortis eget. Nullam luctus lacinia ligula. 
-								In hac habitasse platea dictumst. Proin molestie sagittis diam, vitae hendrerit libero viverra non. Nunc sodales erat tortor, eu rutrum neque tempor eu.
-								<a href="javascript:alert('Aca se abre modal noticia');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
-							</div>
-							<div><img src="{{ asset('bundles/public/images/macrigato.jpg') }}" style="" width="100%"></div>		
-							<div>
-								<ul class="share-buttons">
-									<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-									<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-									<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
-								</ul>
-							</div>
-						</div>
-					<!--</a>-->
-				</div>
-			</div>
-				
-			<div class="col s12 l2">				
-					<div class="News2">
-						<div class="titleNews">Un hospital que se derrumba</div>
-						<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 120px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, 
-							libero et finibus pretium, nulla lacus tempus enim, vel fringilla turpis nunc sit amet nisl. Sed ultricies fermentum malesuada. Maecenas at ante quis lorem blandit auctor. Suspendisse potenti. 
-							<a href="javascript:alert('Aca se abre modal noticia');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
-						</div>
-						<!--<div><img src="{{ asset('bundles/public/images/posadas.jpg') }}" style="filter: grayscale();" width="100%"></div>-->		
+				<div class="row">
+					<div class="col s12 l6">
+						{% if news[4].imagen %}
+						<div><img src="{{ asset('bundles/public/upload/news/') }}{{ news[4].imagen }}?rnd={{ news[4].rndNumber }}" style="" width="100%"></div>
+						{% endif %}
+					</div>	
+					<div class="col s12 l6">
+						<div class="titleNews2">{{ news[4].titulo }}</div>
+						<div id="divTextNoticia4" class="copeteTxt ellipsisText" style="max-height: 120px;">{{ news[4].texto|raw }}
+							<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news[4].hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+						</div>	
 						<div>
 							<ul class="share-buttons">
 								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
 								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
 								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
 							</ul>
-						</div>
-					</div>
-					
-					<div class="section">
-						<div class="divider"></div>
-					</div>
-				<a class="waves-effect waves-light btn-large pink darken-3 OtrasNoticias hide-on-med-and-down" style="margin-top:30%;">Otras <b>Noticias</b></a>
-			</div>	
-			<div class="col s12 l4">	
-				<div class="card">
-					<div class="card-content">
-						<div class="titleNews">Que no se diga, Rodríguez larreta</div>
-						<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 120px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, 
-							libero et finibus pretium, nulla lacus tempus enim, vel fringilla turpis nunc sit amet nisl. Sed ultricies fermentum malesuada. Maecenas at ante quis lorem blandit auctor. Suspendisse potenti. 
-							<a href="javascript:alert('Aca se abre modal noticia');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
-						</div>
-						<div><img src="{{ asset('bundles/public/images/larreta.jpg') }}" style="filter: grayscale();" width="100%"></div>		
-						<div>
-							<ul class="share-buttons">
-								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
-							</ul>
-						</div>
+						</div>						
 					</div>
 				</div>
-					<a class="waves-effect waves-light btn-large pink darken-3 OtrasNoticias hide-on-large-only">Otras <b>Noticias</b></a>
+				<div class="divider"></div>					
+				<br>
+			</div>		
+		</div>	
+		<div class="row">		
+			<div class="col s12 l6 center">	
+				<div><img src="{{ asset('bundles/public/images/publi-3.jpg') }}" style="width: 320px; height: 250px;"></div>
+			</div>
+			<div class="col s12 l6 center">
+				<div><img src="{{ asset('bundles/public/images/publi-5.jpg') }}" style="width: 320px; height: 250px;"></div>
 			</div>	
-			
-
-				
-
 		</div>
-		<div class="row">	
-			<div class="col s12">
-				<div class="divider"></div>
-			</div>
-		</div>
-		<br>
-			
-		<div class="row">
-			<div class="col s12 l4 center">	
-				<div><img src="{{ asset('bundles/public/images/publi-1.jpg') }}" style="width: 320px; height: 250px;"></div>						
-			</div>
-			
-			<div class="col s12 l4 center">
-				<div><img src="{{ asset('bundles/public/images/publi-2.jpg') }}" style="width: 320px; height: 250px;"></div>							
-			</div>
-			
-			<div class="col s12 l4 center">
-				<div><img src="{{ asset('bundles/public/images/trivago.jpg') }}" style="width: 320px; height: 250px;"></div>							
-			</div>
-		</div>
-	
-		<div class="row center">	
-		  <div class="parallax-container valign-wrapper" style="height:150px; margin: 40px 0 40px 0">
-			<div class="center col s12 center"><img src="{{ asset('bundles/public/images/logoColor.png') }}" class="responsive-img"></div>
-			<div class="parallax"><img src="{{ asset('bundles/public/images/buenos_aires.jpg') }}" style="filter: grayscale(); opacity: 0.5;"></div>
-		  </div>
-		</div>  
-		
-		<div class="container" style="margin-bottom:150px;">		
-			<div class="row">
-				<div class="col s12 l6">
-					<div class="row">
-						<div class="col s12 l6">
-							<div><img src="{{ asset('bundles/public/images/delpo.jpg') }}" style="filter: grayscale();" width="100%"></div>	
-						</div>	
-						<div class="col s12 l6">
-							<div class="titleNews2">No viene a la Davis</div>
-							<div class="copeteTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, libero et finibus pretium.</div>	
-							<div>
-								<ul class="share-buttons">
-									<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-									<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-									<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
-								</ul>
-							</div>						
-						</div>
-					</div>
-					<div class="divider"></div>					
-					<br>
-				</div>	
-				
-				<div class="col s12 l6">
-					<div class="row">
-						<div class="col s12 l6">
-							<div><img src="{{ asset('bundles/public/images/losteau.jpg') }}" style="filter: grayscale();" width="100%"></div>	
-						</div>	
-						<div class="col s12 l6">
-							<div class="titleNews2">Losteau candidato</div>
-							<div class="copeteTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere, libero et finibus pretium.</div>	
-							<div>
-								<ul class="share-buttons">
-									<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-									<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-									<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
-								</ul>
-							</div>						
-						</div>
-					</div>
-					<div class="divider"></div>					
-					<br>
-				</div>		
-			</div>	
-			
-
-	
-			<div class="row">		
-				<div class="col s12 l6 center">	
-					<div><img src="{{ asset('bundles/public/images/publi-3.jpg') }}" style="width: 320px; height: 250px;"></div>
-				</div>
-				<div class="col s12 l6 center">
-					<div><img src="{{ asset('bundles/public/images/publi-5.jpg') }}" style="width: 320px; height: 250px;"></div>
-				</div>	
-			</div>
-		</div>
-	</main>
+	</div>
+	<input id="UrlAjaxPopupPortalNewsView" name="UrlAjaxPopupPortalNewsView" type="hidden" value="{{ arrayUrlAjax.UrlAjaxPopupPortalNewsView }}">
+</main>
   
-</body>
-
 <script>
-	$(document).ready(function(){
-		$('.parallax').parallax();
-		$('.dropdown-button').dropdown();
-		$('select').material_select();
-		$('.slider').slider({full_width: true, indicators: false});
-		$('.tooltipped').tooltip({delay: 50});
-		$('.collapsible').collapsible();
-		$('.carousel.carousel-slider').carousel({full_width: true});
-		$('.button-collapse').sideNav();
-		
-		$('.ellipsisText').dotdotdot({
-			after: "a.readMore",
-			watch: "window",
-		});		
-	});
-
-  $('.modal').modal({
-      dismissible: true, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '10%', // Ending top style attribute
-      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        //console.log('ready');
-        //console.log(modal, trigger);
-      },
-      complete: function() {
-		console.log('close');
-		} // Callback for Modal close
-    }
-  );
-  
-	function FxOpenModal()
-	{
-		$('.modal').modal('open');
-	}
 
 </script>		
 	

@@ -31,9 +31,20 @@ class CommonBL
         return Codigo5411Constants::PAGINATOR_RESULTS_PER_PAGE;
     }
 
+    public function getResultsOtherNewsPerPage()
+    {
+        return Codigo5411Constants::PAGINATOR_OTHER_NEWS_RESULTS_PER_PAGE;
+    }
+
     public function getPaginatorPageCount($gridCount)
     {
         $pageCount = ceil($gridCount / $this->getResultsPerPage());
+        return $pageCount;
+    }
+    
+    public function getPaginatorOtherNewsPageCount($gridCount)
+    {
+        $pageCount = ceil($gridCount / $this->getResultsOtherNewsPerPage());
         return $pageCount;
     }
     
@@ -42,9 +53,19 @@ class CommonBL
         return Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_LOGIN;
     }
     
+    public function getUrlOtherNews()
+    {
+        return Codigo5411Constants::URL_SITE.Codigo5411Constants::URL_OTHER_NEWS;
+    }
+    
     public function getUrlAjax()
     {
-        $arrayUrlAjax = array('UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+        $arrayUrlAjax = array('UrlSite' => Codigo5411Constants::URL_SITE,
+                              'UrlHome' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
+                              'UrlOtherNews' => $this->getUrlOtherNews(),
+                              'UrlAjaxPopupPortalNewsView' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_POPUP_PORTAL_NEWS_VIEW,
+                              'UrlAjaxGetGridOtherNewsPage' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_GRID_OTHER_NEWS_PAGE,
+                              'UrlAjaxGetGridOtherNewsPaginator' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_OTHER_NEWS_PAGINATOR,
                               'UrlNews' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_NEWS,
                               'UrlUsers' => Codigo5411Constants::URL_SITE.Codigo5411Constants::MENU_USERS,
                               'UrlAjaxLoginCheck' => Codigo5411Constants::URL_SITE.Codigo5411Constants::AJAX_LOGIN_CHECK,

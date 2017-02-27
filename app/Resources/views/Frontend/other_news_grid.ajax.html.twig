@@ -1,0 +1,18 @@
+		{% for news in otherNews %}
+		<div class="row">
+			<div class="col s12 l8">
+				<div class="titleNews">{{ news.titulo }}</div>
+				<div class="copeteTxt ellipsisText" style="max-height: 120px;">{{ news.texto|raw }}
+					<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news.hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
+				</div>	
+			</div>	
+			<div class="col s12 l4">
+				{% if news.imagen %}
+				<img class="responsive-img" src="{{ asset('bundles/public/upload/news/') }}{{ news.imagen }}?rnd={{ news.rndNumber }}">
+				{% endif %}
+			</div>		
+		</div>		
+		<div class="section">
+			<div class="divider"></div>
+		</div>
+		{% endfor %}

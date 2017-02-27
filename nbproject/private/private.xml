@@ -10,11 +10,11 @@
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/BL/Backend/NewsBL.php</file>
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/Backend/User.php</file>
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/BL/Backend/LoginBL.php</file>
+            <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/BL/Frontend/HomeBL.php</file>
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/Frontend/Home.php</file>
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/BL/Common/CommonBL.php</file>
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Controller/Backend/News.php</file>
             <file>file:/D:/wamp/www/Bue5411/src/AppBundle/Constants/Codigo5411Constants.php</file>
-            <file>file:/D:/wamp/www/Bue5411/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Session/SessionInterface.php</file>
         </group>
     </open-files>
 </project-private>

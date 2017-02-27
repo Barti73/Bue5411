@@ -21,7 +21,7 @@ class NoticiaBL
     protected $em;
     protected $fx;
 
-    const noticiaSalt = "noticiaSalt";
+    const NOTICIA_SALT = "noticiaSalt";
     protected $container;
     
     public function __construct($container)
@@ -33,12 +33,12 @@ class NoticiaBL
 
     public function getNoticiaIdHashed($noticiaId)
     {
-        return $this->fx->encodeHash($noticiaId, self::noticiaSalt, 10);
+        return $this->fx->encodeHash($noticiaId, self::NOTICIA_SALT, 10);
     }
             
     public function getNoticiaIdFromHashed($noticiaIdHashed)
     {
-        return $this->fx->decodeHash($noticiaIdHashed, self::noticiaSalt, 10);
+        return $this->fx->decodeHash($noticiaIdHashed, self::NOTICIA_SALT, 10);
     }
     
     public function getNoticiaData($noticia)
