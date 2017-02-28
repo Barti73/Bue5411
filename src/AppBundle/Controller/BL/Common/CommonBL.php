@@ -26,6 +26,22 @@ class CommonBL
         $this->fx = new PHPFunctions();
     }
     
+    public function getFormattedDate()
+    {
+        //Esta fx devuelve "Ciudad de Buenos Aires, Sábado 28 Enero de 2017"
+        $today = getdate(); 
+        
+        $weekDay = $this->fx->numToDia($today["wday"]);
+        $numDay = $today["mday"];
+        $month = $this->fx->numToMes($today["mon"]);
+        $year = $today["year"];
+        $textDate = "<b>Ciudad de Buenos Aires,</b> [weekDay] [numDay] [month] de [year]";
+        
+        $response = str_replace(array("[weekDay]", "[numDay]", "[month]", "[year]"), array($weekDay, $numDay, $month, $year), $textDate);
+        return $response;
+    }
+
+
     public function getResultsPerPage()
     {
         return Codigo5411Constants::PAGINATOR_RESULTS_PER_PAGE;

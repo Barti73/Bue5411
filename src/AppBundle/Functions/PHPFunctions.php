@@ -120,13 +120,29 @@ class PHPFunctions
  
     function numToDia($numDia)
     {
+        if ($numDia == 0) return 'Domingo';
         if ($numDia == 1) return 'Lunes';
         if ($numDia == 2) return 'Martes';
         if ($numDia == 3) return 'Miércoles';
         if ($numDia == 4) return 'Jueves';
         if ($numDia == 5) return 'Viernes';
         if ($numDia == 6) return 'Sábado';
-        if ($numDia == 7) return 'Domingo';
+    }
+    
+    function numToMes($numMes)
+    {
+        if ($numMes == 1) return 'Enero';
+        if ($numMes == 2) return 'Febrero';
+        if ($numMes == 3) return 'Marzo';
+        if ($numMes == 4) return 'Abril';
+        if ($numMes == 5) return 'Mayo';
+        if ($numMes == 6) return 'Junio';
+        if ($numMes == 7) return 'Julio';
+        if ($numMes == 8) return 'Agosto';
+        if ($numMes == 9) return 'Septiembre';
+        if ($numMes == 10) return 'Octubre';
+        if ($numMes == 11) return 'Noviembre';
+        if ($numMes == 12) return 'Diciembre';
     }
     
     function isValidEmail($email)

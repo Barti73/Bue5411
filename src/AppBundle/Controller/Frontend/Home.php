@@ -38,8 +38,11 @@ class Home extends Controller
         //Noticias
         $arrayNews = $this->bl->getPortalNews();
         //return new response(var_dump($arrayNews));
+        //Date
+        $formattedDate = $commonBL->getFormattedDate();
         
         return $this->render('Frontend/portal.html.twig', array('news' => $arrayNews,
+                                                                'formattedDate' => $formattedDate,
                                                                 'arrayUrlAjax' => $arrayUrlAjax));
     }
     
@@ -56,8 +59,11 @@ class Home extends Controller
         //Count
         $search = '';
         $pageCount = $this->bl->getCountOtherNews($search);
+        //Date
+        $formattedDate = $commonBL->getFormattedDate();
         
         return $this->render('Frontend/other_news.html.twig', array('pageCount' => $pageCount,
+                                                                    'formattedDate' => $formattedDate,
                                                                     'arrayUrlAjax' => $arrayUrlAjax));
     }
 
