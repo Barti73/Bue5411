@@ -113,5 +113,27 @@ class Home extends Controller
                                                                             'backend' => 0));
     }
     
+    /**
+     * @Route("/Noticias/{newsIdHashed}/{newsTitulo}")
+     */
+    public function NoticiaVer(Request $request, $newsIdHashed, $newsTitulo)
+    {
+        $this->mainConstructor();
+
+        //URLs
+        $commonBL = new CommonBL($this->container);
+        $arrayUrlAjax = $commonBL->getUrlAjax();
+        
+        //Date
+        $formattedDate = $commonBL->getFormattedDate();
+        
+        //Data noticia
+        $newsData = $this->bl->getPopupNews($newsIdHashed);
+        //return new response(var_dump($newsData));
+        
+        return $this->render('Frontend/news_view.html.twig', array('newsData' => $newsData,
+                                                                   'formattedDate' => $formattedDate,
+                                                                   'arrayUrlAjax' => $arrayUrlAjax));
+    }
     
 }
