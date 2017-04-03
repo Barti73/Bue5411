@@ -54,6 +54,8 @@ class NoticiaBL
                           'imagen' => '',
                           'estado' => '',
                           'estadoTexto' => '',
+                          'url' => '',
+                          'urlEncoded' => '',
                           'rndNumber' => '');
 
         if ($noticia)
@@ -67,6 +69,12 @@ class NoticiaBL
             if ($noticia->getEstado() == 3) { $estadoTexto = 'Borrador'; }
             //Posicion
             $posicion = ($noticia->getPosicion()) ? $noticia->getPosicion() : '-';
+            //Url
+            $tituloURLNoComma = str_replace(array(',', '.'), array('', ''), $noticia->getTitulo());
+            $tituloURLNoSpace = str_replace(' ', '-', $tituloURLNoComma);
+            $url = Codigo5411Constants::URL_SITE."/Noticias/".$this->getNoticiaIdHashed($noticia->getId())."/".$tituloURLNoSpace;
+            //Url Encoded
+            $urlEncoded = urlencode($url);
             
             $response = array('id' => $noticia->getId(),
                               'hashedId' => $this->getNoticiaIdHashed($noticia->getId()),
@@ -79,6 +87,8 @@ class NoticiaBL
                               'imagen' => $noticia->getImagen(),
                               'estado' => $noticia->getEstado(),
                               'estadoTexto' => $estadoTexto,
+                              'url' => $url,
+                              'urlEncoded' => $urlEncoded,
                               'rndNumber' => rand(1, 100));
             
         }

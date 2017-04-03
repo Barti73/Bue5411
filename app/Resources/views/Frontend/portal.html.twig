@@ -2,6 +2,15 @@
 
 {% block body %}
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <main>
 
 	<div class="row" style="margin-top: 10px !important;">
@@ -19,9 +28,26 @@
 						{% endif %}
 						<div>
 							<ul class="share-buttons">
-								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+								<!-- Facebook -->
+								<li>
+									<div class="" data-href="{{ news[0].url }}" data-layout="button" data-size="large" data-mobile-iframe="true" style="float: left; margin-right: 5px;">
+										<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news[0].urlEncoded }}&amp;src=sdkpreparse">
+											<img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}">
+										</a>
+									</div>
+								</li>
+								<!-- Twitter -->
+								<li>
+									<a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text={{ news[0].titulo }}&url={{ news[0].urlEncoded }}">
+										<img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}">
+									</a>
+								</li>
+								<!-- Mail -->
+								<li>
+									<a href="mailto:?subject={{ news[0].titulo }}&body={{ news[0].url }}" target="_blank" title="Send email">
+										<img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}">
+									</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -35,12 +61,28 @@
 					<div id="divTextNoticia1" class="copeteTxt ellipsisText" style="max-height: 300px;">{{ news[1].texto|raw }}
 						<a href="javascript:void(0)" onclick="javascript:FxOpenModalNewsViewJS('{{ news[1].hashedId }}');" class="readMore" style="display: none;">Seguir leyendo &raquo;</a>
 					</div>
-					<!--<div><img src="{{ asset('bundles/public/images/posadas.jpg') }}" style="filter: grayscale();" width="100%"></div>-->		
 					<div>
 						<ul class="share-buttons">
-							<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-							<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-							<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+							<!-- Facebook -->
+							<li>
+								<div class="" data-href="{{ news[1].url }}" data-layout="button" data-size="large" data-mobile-iframe="true" style="float: left; margin-right: 5px;">
+									<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news[1].urlEncoded }}&amp;src=sdkpreparse">
+										<img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}">
+									</a>
+								</div>
+							</li>
+							<!-- Twitter -->
+							<li>
+								<a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text={{ news[1].titulo }}&url={{ news[1].urlEncoded }}">
+									<img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}">
+								</a>
+							</li>
+							<!-- Mail -->
+							<li>
+								<a href="mailto:?subject={{ news[1].titulo }}&body={{ news[1].url }}" target="_blank" title="Send email">
+									<img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}">
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -62,9 +104,26 @@
 					{% endif %}
 					<div>
 						<ul class="share-buttons">
-							<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-							<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-							<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+							<!-- Facebook -->
+							<li>
+								<div class="" data-href="{{ news[2].url }}" data-layout="button" data-size="large" data-mobile-iframe="true" style="float: left; margin-right: 5px;">
+									<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news[2].urlEncoded }}&amp;src=sdkpreparse">
+										<img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}">
+									</a>
+								</div>
+							</li>
+							<!-- Twitter -->
+							<li>
+								<a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text={{ news[2].titulo }}&url={{ news[2].urlEncoded }}">
+									<img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}">
+								</a>
+							</li>
+							<!-- Mail -->
+							<li>
+								<a href="mailto:?subject={{ news[2].titulo }}&body={{ news[2].url }}" target="_blank" title="Send email">
+									<img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}">
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -82,15 +141,15 @@
 		
 	<div class="row">
 		<div class="col s12 l4 center">	
-			<div><img src="{{ asset('bundles/public/images/publi-1.jpg') }}" style="width: 320px; height: 250px;"></div>						
+			<div><img src="{{ asset('bundles/public/images/bancociudad.jpg') }}" style="width: 320px; height: 250px;"></div>						
 		</div>
 		
 		<div class="col s12 l4 center">
-			<div><img src="{{ asset('bundles/public/images/publi-2.jpg') }}" style="width: 320px; height: 250px;"></div>							
+			<div><img src="{{ asset('bundles/public/images/legislaturaportena.jpg') }}" style="width: 320px; height: 250px;"></div>							
 		</div>
 		
 		<div class="col s12 l4 center">
-			<div><img src="{{ asset('bundles/public/images/trivago.jpg') }}" style="width: 320px; height: 250px;"></div>							
+			<div><img src="{{ asset('bundles/public/images/sosgardel.jpg') }}" style="width: 320px; height: 250px;"></div>							
 		</div>
 	</div>
 
@@ -117,9 +176,26 @@
 						</div>	
 						<div>
 							<ul class="share-buttons">
-								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+								<!-- Facebook -->
+								<li>
+									<div class="" data-href="{{ news[3].url }}" data-layout="button" data-size="large" data-mobile-iframe="true" style="float: left; margin-right: 5px;">
+										<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news[3].urlEncoded }}&amp;src=sdkpreparse">
+											<img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}">
+										</a>
+									</div>
+								</li>
+								<!-- Twitter -->
+								<li>
+									<a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text={{ news[3].titulo }}&url={{ news[3].urlEncoded }}">
+										<img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}">
+									</a>
+								</li>
+								<!-- Mail -->
+								<li>
+									<a href="mailto:?subject={{ news[3].titulo }}&body={{ news[3].url }}" target="_blank" title="Send email">
+										<img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}">
+									</a>
+								</li>
 							</ul>
 						</div>						
 					</div>
@@ -142,9 +218,26 @@
 						</div>	
 						<div>
 							<ul class="share-buttons">
-								<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-								<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-								<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+								<!-- Facebook -->
+								<li>
+									<div class="" data-href="{{ news[4].url }}" data-layout="button" data-size="large" data-mobile-iframe="true" style="float: left; margin-right: 5px;">
+										<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ news[4].urlEncoded }}&amp;src=sdkpreparse">
+											<img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}">
+										</a>
+									</div>
+								</li>
+								<!-- Twitter -->
+								<li>
+									<a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text={{ news[4].titulo }}&url={{ news[4].urlEncoded }}">
+										<img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}">
+									</a>
+								</li>
+								<!-- Mail -->
+								<li>
+									<a href="mailto:?subject={{ news[4].titulo }}&body={{ news[4].url }}" target="_blank" title="Send email">
+										<img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}">
+									</a>
+								</li>
 							</ul>
 						</div>						
 					</div>
@@ -158,7 +251,7 @@
 				<div><img src="{{ asset('bundles/public/images/publi-3.jpg') }}" style="width: 320px; height: 250px;"></div>
 			</div>
 			<div class="col s12 l6 center">
-				<div><img src="{{ asset('bundles/public/images/publi-5.jpg') }}" style="width: 320px; height: 250px;"></div>
+				<div><img src="{{ asset('bundles/public/images/codigo5411.jpg') }}" style="width: 320px; height: 250px;"></div>
 			</div>	
 		</div>
 	</div>
