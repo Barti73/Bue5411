@@ -46,9 +46,9 @@ function FxSelectNoticiaModulo(obj)
 	//Actual marcado
 	var btnMarcado = $('#btnModuleSelected').val();
 	//Removemos el color boton marcado
-	$('.btnModule').removeClass('pink darken-3').addClass('blue darken-3'); //Removemos pink..add azul
+	$('.btnModule').removeClass('codigo54411MainColor').addClass('blue darken-3'); //Removemos pink..add azul
 	//Agregamos pink al click
-	$(obj).removeClass('blue darken-3').addClass('pink darken-3'); //Removemos azul
+	$(obj).removeClass('blue darken-3').addClass('codigo54411MainColor'); //Removemos azul
 	//Almacenamos el boton del click
 	$('#btnModuleSelected').val( $(obj).prop('id') );
 	
@@ -56,7 +56,7 @@ function FxSelectNoticiaModulo(obj)
 	if ( $(obj).prop('id') == btnMarcado )
 	{
 		//Agregamos pink al click
-		$(obj).removeClass('pink darken-3').addClass('blue darken-3'); //Removemos pink
+		$(obj).removeClass('codigo54411MainColor').addClass('blue darken-3'); //Removemos pink
 		//Limpiamos el seleccionado
 		$('#btnModuleSelected').val('');
 	}
