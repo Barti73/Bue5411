@@ -16,9 +16,26 @@
 					{% endif %}
 					<div>
 						<ul class="share-buttons">
-							<li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fnoticias%23.com&t=" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}"></a></li>
-							<li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fnoticias%23.com&text=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}"></a></li>
-							<li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fnoticias%23.com" target="_blank" title="Send email" onclick="window.open('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL)); return false;"><img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}"></a></li>
+							<!-- Facebook -->
+							<li>
+								<div class="" data-href="{{ newsData.noticiaData.url }}" data-layout="button" data-size="large" data-mobile-iframe="true" style="float: left; margin-right: 5px;">
+									<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ newsData.noticiaData.urlEncoded }}&amp;src=sdkpreparse">
+										<img alt="Share on Facebook" src="{{ asset('bundles/public/images/Facebook.png') }}">
+									</a>
+								</div>
+							</li>
+							<!-- Twitter -->
+							<li>
+								<a class="twitter-share-button" target="_blank" href="https://twitter.com/intent/tweet?text={{ newsData.noticiaData.titulo }}&url={{ newsData.noticiaData.urlEncoded }}">
+									<img alt="Tweet" src="{{ asset('bundles/public/images/Twitter.png') }}">
+								</a>
+							</li>
+							<!-- Mail -->
+							<li>
+								<a href="mailto:?subject={{ newsData.noticiaData.titulo }}&body={{ newsData.noticiaData.url }}" target="_blank" title="Send email">
+									<img alt="Send email" src="{{ asset('bundles/public/images/Email.png') }}">
+								</a>
+							</li>
 						</ul>
 					</div>	
 					<div class="divider"></div>
