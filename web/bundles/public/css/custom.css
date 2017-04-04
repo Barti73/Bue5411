@@ -222,7 +222,7 @@ footer.page-footer {
 
 
 footer.page-footer .footer-copyright {
-	background-color: #991475 !important;
+	background-color: #630E4B !important;
 }
 
 /*ICONOS SOCIAL MEDIA*/
@@ -247,7 +247,7 @@ a, a:hover {
     width: 40px;
     height: 28px;
     color: #FFF;
-    background-color: #991475;
+    background-color: #630E4B;
     padding-top: 12px;
     border-radius: 20px;
     -moz-border-radius: 20px;
@@ -302,5 +302,5 @@ a, a:hover {
 }
 
 .codigo54411MainColor{
-	background-color: #991475 !important;
+	background-color: #630E4B !important;
 }
